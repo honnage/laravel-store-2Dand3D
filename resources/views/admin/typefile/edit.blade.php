@@ -24,13 +24,13 @@
                 </div>
             @endif
             <div class="container-fluid px-4">
-                <h1 class="mt-4">หมวดหมู่</h1>
+                <h1 class="mt-4">ประเภทนามสกุลไฟล์</h1>
                 <div class="row">
                     <div class="col-xl-12 my-2">
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-bar me-1"></i>
-                                แก้ไขหมวดหมู่
+                                แก้ไขประเภทนามสกุลไฟล์
                             </div>
                             <div class="card-body">
                                 @if (session('status'))
@@ -38,17 +38,17 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <form action="/category/update/{{$category_edit->id}}" method="post" >
+                                <form action="/typefile/update/{{$typefile_edit->id}}" method="post" >
                                     {{csrf_field()}}
                                     <div class="row form-inline">
                                         <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
-                                            <strong class="col-sm-12">หมวดหมู่ สำหรับภาษาไทย :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label"  name="name_th" id="name_th" value="{{ $category_edit->name_th }}">
+                                            <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
+                                            <input type="text" class="col-sm-12 col-form-label"  name="name" id="name" value="{{ $typefile_edit->name }}">
                                          </div>
             
                                          <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
-                                            <strong class="col-sm-12">หมวดหมู่ สำหรับภาษาอังกฤษ :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label" name="name_en" id="name_en" value="{{ $category_edit->name_en }}">
+                                            <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
+                                            <input type="text" class="col-sm-12 col-form-label" name="description" id="description" value="{{ $typefile_edit->description }}">
                                           
                                         </div>
                                     </div>
@@ -66,26 +66,26 @@
                 <div class="card mb-4">
                     <div class="card-header" style="background: rgb(65, 62, 57); color: white">
                         <i class="fas fa-table me-1"></i>
-                        ตารางข้อมูล หมวดหมู่
+                        ตารางข้อมูล ประเภทนามสกุลไฟล์
                     </div>
                     <div class="card-body">
-                        @if($category->count()>0)
+                        @if($typefile->count()>0)
                             <table class="table table-responsive ">
                                 <thead >
                                     <tr>
                                         <th>ลำดับ</th>
-                                        <th>หมวดหมู่ สำหรับภาษาไทย</th>
-                                        <th>หมวดหมู่ สำหรับภาษาอังกฤษ</th>
+                                        <th>ประเภทนามสกุลไฟล์</th>
+                                        <th>คำอธิบาย</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                @foreach($category as $cg)
+                                @foreach($typefile as $tf)
                                 <tbody>
                                     <tr>
-                                        <td><b>{{ $category->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $cg->name_th}}</td>
-                                        <td class="col-sm-6">{{ $cg->name_en}}</td>
+                                        <td><b>{{ $typefile->firstItem()+$tf->index}}</b></td>
+                                        <td class="col-sm-6">{{ $tf->name}}</td>
+                                        <td class="col-sm-6">{{ $tf->description}}</td>
                                         <td class="col-sm-2"> </td>
                                         <td class="col-sm-2"> </td>
                                     </tr>
@@ -93,10 +93,10 @@
                                 @endforeach
                             </table>
                             <div class="pagination-block">
-                                {{  $category->appends(request()->input())->links('layouts.paginationlinks') }}
+                                {{  $typefile->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else
-                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลหมวดหมู่ --</h3>
+                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลประเภทนามสกุลไฟล์ --</h3>
                         @endif
                     </div>
                 </div>

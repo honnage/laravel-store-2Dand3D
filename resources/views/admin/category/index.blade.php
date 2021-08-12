@@ -33,8 +33,6 @@
                                 เพื่มหมวดหมู่
                             </div>
                             <div class="card-body">
-                                
-                            {{-- <canvas id="myBarChart" width="100%" height="40"></canvas></div> --}}
                                 @if (session('status'))
                                     <div class="alert alert-success" role="alert">
                                         {{ session('status') }}
