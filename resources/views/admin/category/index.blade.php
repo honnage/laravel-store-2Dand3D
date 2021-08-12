@@ -94,8 +94,7 @@
                                         <td>
                                             <form class="delete_form" action="category/destroy/{{$cg->id}}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="hidden" class="_method" value="DELETE">
-                                                <input type="submit" class="btn btn-danger col-sm-12" name="" value="ลบ">
+                                                <input type="submit" value="ลบ" data-name="{{$cg->name_th}}" class="btn btn-danger deleteform">
                                             </form>
                                         </td>
                                     </tr>
