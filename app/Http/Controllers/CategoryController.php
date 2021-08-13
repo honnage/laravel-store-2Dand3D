@@ -74,7 +74,7 @@ class CategoryController extends Controller
         //     return redirect()->back();
         // }
         CategoryModel::find($id)->delete();
-        Session()->flash('success','ลบข้อมูลเรียบร้อยแล้ว');
+        Session()->flash('success','ลบข้อมูลเรียบร้อย');
         return redirect('/category');
     }
 

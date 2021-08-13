@@ -23,3 +23,4 @@ Route::post('typefile/store',[TypefileController::class,'store']);
 Route::get('typefile/edit/{id}',[TypefileController::class,'edit']);
 Route::post('typefile/update/{id}',[TypefileController::class, 'update']);
 Route::post('typefile/destroy/{id}',[TypefileController::class, 'destroy']);
+Route::get('typefile/search/',[TypefileController::class, 'search_datatable']);

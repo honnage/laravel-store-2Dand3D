@@ -64,13 +64,12 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header" style="background: rgb(65, 62, 57); color: white; font-size: 18px">
+                    <div class="card-header" style="background: rgb(65, 62, 57); color: white">
                         <label class="my-2">
                             <i class="fas fa-table me-1"></i>
                             <span>ตารางข้อมูล ประเภทนามสกุลไฟล์</span> 
                         </label>
                        
-                        
                         <label style="float:right;text-align:right;" class="my-2">
                             <form action="/typefile/search/" method="get">
                                 <div class="input-group">
@@ -106,7 +105,7 @@
                                         <td>
                                             <form class="delete_form" action="typefile/destroy/{{$tf->id}}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="submit" value="ลบ" data-name="{{$tf->name}}" class="btn btn-danger deleteform col-sm-12">
+                                                <input type="submit" value="ลบ" data-name="{{$tf->name}}" class="btn btn-danger deleteform">
                                             </form>
                                         </td>
                                     </tr>
@@ -117,8 +116,12 @@
                                 {{  $typefile->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else
-                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลประเภทนามสกุลไฟล์ --</h3>
+                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลค้นหาที่ใกล้เคียง --</h3>
                         @endif
+
+                        <div class="d-flex flex-row-reverse bd-highlight my-4">
+                            <a href="/typefile"  class="btn btn-outline-dark col-sm-1">ย้อนกลับ</a>
+                        </div>
                     </div>
                 </div>
             </div>

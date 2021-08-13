@@ -65,8 +65,21 @@
                 </div>
                 <div class="card mb-4">
                     <div class="card-header" style="background: rgb(65, 62, 57); color: white">
-                        <i class="fas fa-table me-1"></i>
-                        ตารางข้อมูล ประเภทนามสกุลไฟล์
+                        <label class="my-2">
+                            <i class="fas fa-table me-1"></i>
+                            <span>ตารางข้อมูล ประเภทนามสกุลไฟล์</span> 
+                        </label>
+                       
+                        <label style="float:right;text-align:right;" class="my-2">
+                            <form action="/typefile/search/" method="get">
+                                <div class="input-group">
+                                    <input type="search" name="search" class="form-control" placeholder="ค้นหา นามสกุลไฟล์..." style="width: 200px">
+                                    <span class="input-group-present">
+                                        <button type="submit" class="btn btn-primary"  id="btnNavbarSearch">ค้นหา</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </label>
                     </div>
                     <div class="card-body">
                         @if($typefile->count()>0)
