@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class UsersController extends Controller
+class AssetController extends Controller
 {
     public function index()
     {       
-        $users = DB::table('users')->paginate(10);
-        return view('admin.users.index', compact('users'));
-        // dd($users);
+        // $users = DB::table('users')->paginate(10);
+        $user = Auth::user();
+        return view('asset.upload', compact('user'));
     }
+
+
 }

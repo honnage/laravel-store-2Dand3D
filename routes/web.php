@@ -5,7 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TypefileController;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\UsersController;
-
+use App\Http\Controllers\AssetController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,10 +17,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // UsersController
 Route::get('users',[UsersController::class,'index']);
-Route::get('users/edit/{id}',[UsersController::class,'edit']);
-Route::post('users/update/{id}',[UsersController::class, 'update']);
-Route::post('users/destroy/{id}',[UsersController::class, 'destroy']);
-Route::get('users/search/',[UsersController::class, 'search_datatable']);
 
 // CategoryController
 Route::get('category',[CategoryController::class,'index']);
@@ -45,3 +41,11 @@ Route::get('license/edit/{id}',[LicenseController::class,'edit']);
 Route::post('license/update/{id}',[LicenseController::class, 'update']);
 Route::post('license/destroy/{id}',[LicenseController::class, 'destroy']);
 Route::get('license/search/',[LicenseController::class, 'search_datatable']);
+
+// AssetController
+Route::get('asset',[AssetController::class,'index']);
+Route::post('asset/upload',[AssetController::class,'upload']);
+Route::get('asset/edit/{id}',[AssetController::class,'edit']);
+Route::post('asset/update/{id}',[AssetController::class, 'update']);
+Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
+Route::get('asset/search/',[AssetController::class, 'search_datatable']);
