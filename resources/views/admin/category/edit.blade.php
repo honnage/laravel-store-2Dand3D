@@ -64,9 +64,22 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header" style="background: rgb(65, 62, 57); color: white">
-                        <i class="fas fa-table me-1"></i>
-                        ตารางข้อมูล หมวดหมู่
+                    <div class="card-header" style="background: rgb(65, 62, 57); color: white; font-size: 18px">
+                        <label class="my-2">
+                            <i class="fas fa-table me-1"></i>
+                            <span>ตารางข้อมูล หมวดหมู่</span> 
+                        </label>
+
+                        <label style="float:right;text-align:right;" class="my-2">
+                            <form action="/category/search/" method="get">
+                                <div class="input-group">
+                                    <input type="search" name="search" class="form-control" placeholder="ค้นหา หมวดหมู่..." style="width: 200px">
+                                    <span class="input-group-present">
+                                        <button type="submit" class="btn btn-primary"  id="btnNavbarSearch">ค้นหา</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </label>
                     </div>
                     <div class="card-body">
                         @if($category->count()>0)
@@ -98,6 +111,10 @@
                         @else
                             <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลหมวดหมู่ --</h3>
                         @endif
+
+                        <div class="d-flex flex-row-reverse bd-highlight my-4">
+                            <a href="/category"  class="btn btn-outline-dark col-sm-1">ย้อนกลับ</a>
+                        </div>
                     </div>
                 </div>
             </div>

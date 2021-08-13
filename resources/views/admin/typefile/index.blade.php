@@ -69,8 +69,7 @@
                             <i class="fas fa-table me-1"></i>
                             <span>ตารางข้อมูล ประเภทนามสกุลไฟล์</span> 
                         </label>
-                       
-                        
+
                         <label style="float:right;text-align:right;" class="my-2">
                             <form action="/typefile/search/" method="get">
                                 <div class="input-group">

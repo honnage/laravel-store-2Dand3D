@@ -31,6 +31,7 @@
                             <div class="card-header">
                                 <i class="fas fa-chart-bar me-1"></i>
                                 เพื่มหมวดหมู่
+                                {{-- <a href="<?php echo $path ?>" class="btn btn-primary">hoooo</a> --}}
                             </div>
                             <div class="card-body">
                                 @if (session('status'))
@@ -49,10 +50,9 @@
                                          <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
                                             <strong class="col-sm-12">หมวดหมู่ สำหรับภาษาอังกฤษ :<strong style="color:red;"> * </strong></strong><br>
                                             <input type="text" class="col-sm-12 col-form-label" name="name_en" id="name_en" placeholder="เช่น Art ">
-                                          
                                         </div>
                                     </div>
-                               
+
                                     <div class="d-flex flex-row-reverse bd-highlight">
                                         <button type="submit" name="submit" class="btn btn-success col-sm-2">เพิ่มข้อมูล</button>
                                         &nbsp;&nbsp;
@@ -64,12 +64,12 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header" style="background: rgb(65, 62, 57); color: white; font-size: 18px">
+                    <div class="card-header" style="background: rgb(65, 62, 57); color: white">
                         <label class="my-2">
                             <i class="fas fa-table me-1"></i>
                             <span>ตารางข้อมูล หมวดหมู่</span> 
                         </label>
-
+                       
                         <label style="float:right;text-align:right;" class="my-2">
                             <form action="/category/search/" method="get">
                                 <div class="input-group">
@@ -81,32 +81,31 @@
                             </form>
                         </label>
                     </div>
-
                     <div class="card-body">
                         @if($category->count()>0)
                             <table class="table table-responsive ">
                                 <thead >
                                     <tr>
                                         <th>ลำดับ</th>
-                                        <th>หมวดหมู่ สำหรับภาษาไทย</th>
-                                        <th>หมวดหมู่ สำหรับภาษาอังกฤษ</th>
+                                        <th>ประเภทนามสกุลไฟล์</th>
+                                        <th>คำอธิบาย</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                @foreach($category as $cg)
+                                @foreach($category as $tf)
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $category->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $cg->name_th}}</td>
-                                        <td class="col-sm-6">{{ $cg->name_en}}</td>
+                                        <td class="col-sm-6">{{ $tf->name_th}}</td>
+                                        <td class="col-sm-6">{{ $tf->name_en}}</td>
                                         <td>
-                                            <a class="btn btn-warning col-sm-12" href="category/edit/{{$cg->id}}">แก้ไข</a>
+                                            <a class="btn btn-warning col-sm-12" href="typefile/edit/{{$tf->id}}">แก้ไข</a>
                                         </td>
                                         <td>
-                                            <form class="delete_form" action="category/destroy/{{$cg->id}}" method="post">
+                                            <form class="delete_form" action="typefile/destroy/{{$tf->id}}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="submit" value="ลบ" data-name="{{$cg->name_th}}" class="btn btn-danger deleteform">
+                                                <input type="submit" value="ลบ" data-name="{{$tf->name_th}}" class="btn btn-danger deleteform">
                                             </form>
                                         </td>
                                     </tr>
@@ -117,8 +116,12 @@
                                 {{  $category->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else
-                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลหมวดหมู่ --</h3>
+                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลค้นหาที่ใกล้เคียง --</h3>
                         @endif
+
+                        <div class="d-flex flex-row-reverse bd-highlight my-4">
+                            <a href="/category"  class="btn btn-outline-dark col-sm-1">ย้อนกลับ</a>
+                        </div>
                     </div>
                 </div>
             </div>
