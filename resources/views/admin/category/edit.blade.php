@@ -66,7 +66,7 @@
                                     </div>
                             
                                     <div class="d-flex flex-row-reverse bd-highlight">
-                                        <button type="submit" name="submit" class="btn btn-success col-sm-2">เพิ่มข้อมูล</button>
+                                        <button type="submit" name="submit" class="btn btn-success col-sm-2">อัพเดทข้อมูล</button>
                                         &nbsp;&nbsp;
                                         <button class="btn btn-secondary col-sm-1" type="reset">ยกเลิก</button>
                                     </div>

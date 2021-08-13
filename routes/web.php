@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TypefileController;
+use App\Http\Controllers\LicenseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,3 +26,10 @@ Route::get('typefile/edit/{id}',[TypefileController::class,'edit']);
 Route::post('typefile/update/{id}',[TypefileController::class, 'update']);
 Route::post('typefile/destroy/{id}',[TypefileController::class, 'destroy']);
 Route::get('typefile/search/',[TypefileController::class, 'search_datatable']);
+
+Route::get('license',[LicenseController::class,'index']);
+Route::post('license/store',[LicenseController::class,'store']);
+Route::get('license/edit/{id}',[LicenseController::class,'edit']);
+Route::post('license/update/{id}',[LicenseController::class, 'update']);
+Route::post('license/destroy/{id}',[LicenseController::class, 'destroy']);
+Route::get('license/search/',[LicenseController::class, 'search_datatable']);

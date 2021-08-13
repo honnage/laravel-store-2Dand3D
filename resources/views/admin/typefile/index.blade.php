@@ -130,7 +130,7 @@
                                 {{  $typefile->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else
-                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลค้นหาที่ใกล้เคียง --</h3>
+                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลประเภทนามสกุลไฟล์ --</h3>
                         @endif
 
                         <div class="d-flex flex-row-reverse bd-highlight my-4">

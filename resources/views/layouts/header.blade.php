@@ -125,11 +125,11 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">ชิ้นงานในระบบ</a>
-                                    <a class="nav-link" href="layout-static.html">ผู้ใช้งาน</a>
-                                    <a class="nav-link" href="/category">หมวดหมู่</a>
-                                    <a class="nav-link" href="/typefile">ประเภทไฟล์</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">ประเภทเผยเเพร่</a>
+                                    <a class="nav-link" href="{{url('/asset')}}">ชิ้นงานในระบบ</a>
+                                    <a class="nav-link" href="{{url('/users')}}">ผู้ใช้งาน</a>
+                                    <a class="nav-link" href="{{url('/category')}}">หมวดหมู่</a>
+                                    <a class="nav-link" href="{{url('/typefile')}}">ประเภทไฟล์</a>
+                                    <a class="nav-link" href="{{url('/license')}}">ประเภทเผยเเพร่</a>
                                 </nav>
                             </div>
 
