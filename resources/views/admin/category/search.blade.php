@@ -103,23 +103,23 @@
                                         <th>ลำดับ</th>
                                         <th>หมวดหมู่ สำหรับภาษาไทย</th>
                                         <th>หมวดหมู่ สำหรับภาษาอังกฤษ</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th><center>แก้ไข</center></th>
+                                        <th><center>ลบ</center></th>
                                     </tr>
                                 </thead>
-                                @foreach($category as $cg)
+                                @foreach($category as $row)
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $category->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $cg->name_th}}</td>
-                                        <td class="col-sm-6">{{ $cg->name_en}}</td>
+                                        <td class="col-sm-6">{{ $row->name_th}}</td>
+                                        <td class="col-sm-6">{{ $row->name_en}}</td>
                                         <td>
-                                            <a class="btn btn-warning col-sm-12" href="{{url('/category/edit/'.$cg->id)}}">แก้ไข</a>
+                                            <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/category/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>
                                         <td>
-                                            <form class="delete_form" action="{{url('/category/destroy/'.$cg->id)}}" method="post">
+                                            <form class="delete_form" action="{{url('/category/destroy/'.$row->id)}}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="submit" value="ลบ" data-name="{{$cg->name_th}}" class="btn btn-danger deleteform">
+                                                <a style="color:white; width: 50px" data-name="{{$row->name}}" class="btn btn-danger deleteform"><i class="fas fa-trash-alt"></i></a>
                                             </form>
                                         </td>
                                     </tr>

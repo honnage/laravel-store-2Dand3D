@@ -105,23 +105,23 @@
                                         <th>ลำดับ</th>
                                         <th>ประเภทเผยเเพร่ สำหรับภาษาไทย</th>
                                         <th>ประเภทเผยเเพร่ สำหรับภาษาอังกฤษ</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th><center>แก้ไข</center></th>
+                                        <th><center>ลบ</center></th>
                                     </tr>
                                 </thead>
-                                @foreach($license as $lc)
+                                @foreach($license as $row)
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $license->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $lc->name_th}}</td>
-                                        <td class="col-sm-6">{{ $lc->name_en}}</td>
+                                        <td class="col-sm-6">{{ $row->name_th}}</td>
+                                        <td class="col-sm-6">{{ $row->name_en}}</td>
                                         <td>
-                                            <a class="btn btn-warning col-sm-12" href="{{url('/license/edit/'.$lc->id)}}">แก้ไข</a>
+                                            <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/license/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>
                                         <td>
-                                            <form class="delete_form" action="{{url('/license/destroy/'.$lc->id)}}" method="post">
+                                            <form class="delete_form" action="{{url('/license/destroy/'.$row->id)}}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="submit" value="ลบ" data-name="{{$lc->name_th}}" class="btn btn-danger deleteform">
+                                                <a style="color:white; width: 50px" data-name="{{$row->name_th}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
                                             </form>
                                         </td>
                                     </tr>

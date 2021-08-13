@@ -103,23 +103,23 @@
                                         <th>ลำดับ</th>
                                         <th>ประเภทนามสกุลไฟล์</th>
                                         <th>คำอธิบาย</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th><center>แก้ไข</center></th>
+                                        <th><center>ลบ</center></th>
                                     </tr>
                                 </thead>
-                                @foreach($typefile as $tf)
+                                @foreach($typefile as $row)
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $typefile->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $tf->name}}</td>
-                                        <td class="col-sm-6">{{ $tf->description}}</td>
+                                        <td class="col-sm-6">{{ $row->name}}</td>
+                                        <td class="col-sm-6">{{ $row->description}}</td>
                                         <td>
-                                            <a class="btn btn-warning col-sm-12" href="{{url('/typefile/edit/'.$tf->id)}}">แก้ไข</a>
+                                            <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/typefile/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>
                                         <td>
-                                            <form class="delete_form" action="{{url('/typefile/destroy/'.$tf->id)}}" method="post">
+                                            <form class="delete_form" action="{{url('/typefile/destroy/'.$row->id)}}" method="post">
                                                 {{csrf_field()}}
-                                                <input type="submit" value="ลบ" data-name="{{$tf->name}}" class="btn btn-danger deleteform">
+                                                <a style="color:white; width: 50px" data-name="{{$row->name}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
                                             </form>
                                         </td>
                                     </tr>
