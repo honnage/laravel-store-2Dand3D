@@ -85,7 +85,7 @@
                         </label>
                        
                         <label style="float:right;text-align:right;" class="my-2">
-                            <form action="/category/search/" method="get">
+                            <form action="{{url('/category/search/')}}" method="get">
                                 <div class="input-group">
                                     <input type="search" name="search" class="form-control" placeholder="ค้นหา หมวดหมู่..." style="width: 200px">
                                     <span class="input-group-present">
@@ -101,8 +101,8 @@
                                 <thead >
                                     <tr>
                                         <th>ลำดับ</th>
-                                        <th>ประเภทนามสกุลไฟล์</th>
-                                        <th>คำอธิบาย</th>
+                                        <th>หมวดหมู่ สำหรับภาษาไทย</th>
+                                        <th>หมวดหมู่ สำหรับภาษาอังกฤษ</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
