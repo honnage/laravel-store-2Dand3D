@@ -12,4 +12,8 @@ class TypefileModel extends Model
         'name',
         'description'
     ];
+
+    public function asset(){
+        return $this->belongsToMany(AssetModel::class);
+    }
 }

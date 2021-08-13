@@ -12,4 +12,8 @@ class LicenseModel extends Model
         'name_th',
         'name_en'
     ];
+
+    public function asset(){
+        return $this->hasMany(AssetModel::class);
+    }
 }

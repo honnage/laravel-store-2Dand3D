@@ -20,4 +20,16 @@ class AssetModel extends Model
         'typefile_id',
         'license_id',
     ];
+
+    public function category(){
+        return $this->belongsTo(CategoryModel::class);
+    }
+
+    public function typefile(){
+        return $this->belongsToMany(TypefileModel::class);
+    }
+
+    public function license(){
+        return $this->belongsTo(LicenseModel::class);
+    }
 }
