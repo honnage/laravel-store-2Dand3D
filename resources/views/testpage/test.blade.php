@@ -27,3 +27,13 @@
         <button type="submit" name="upload" class="btn btn-success col-sm-2">เพิ่มข้อมูล</button>
     </div>
 </form>
+
+
+<input type="file" id="file-selector" multiple>
+<script>
+  const fileSelector = document.getElementById('file-selector');
+  fileSelector.addEventListener('change', (event) => {
+    const fileList = event.target.files;
+    console.log(fileList);
+  });
+</script>

@@ -49,4 +49,16 @@ class TestController extends Controller
         return view('testpage.success2')->with($data);
     }
 
+    public function test_upload_model(){
+        return view('testpage.uploademodel');
+    }
+
+    public function single_upload_model(Request $request){
+        $data['fileName'] = $request->file('model')->getClientOriginalName();
+        $data['fileType'] = $request->file('model')->getClientOriginalExtension();
+        $data['fileSize'] = $request->file('model')->getSize();
+        $request->file('model')->move(public_path('model'), $request->file('model')->getClientOriginalName());
+        return view('testpage.model_success1')->with($data);
+    }
+
 }
