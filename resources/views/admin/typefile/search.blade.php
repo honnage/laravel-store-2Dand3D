@@ -49,21 +49,28 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                           
+
                                 <form action="{{url('/typefile/store/')}}" method="post" enctype="multipart/form-data">
 
                                     {{csrf_field()}}
-                                    <div class="row form-inline">
-                                        <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
-                                            <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label"  name="name" id="name" placeholder="เช่น odj ">
-                                        </div>
-            
-                                        <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
-                                            <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label" name="description" id="description" placeholder="เช่น เป็นรูปแบบไฟล์ที่ใช้สำหรับวัตถุสามมิติที่มีพิกัด 3D ">
-                                        
-                                        </div>
+                                    
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
+                                        <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
+                                        <input type="text" class="col-sm-12 col-form-label"  name="name" id="name" placeholder="เช่น odj ">
+                                    </div>
+        
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
+                                        <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
+                                        <input type="text" class="col-sm-12 col-form-label" name="description" id="description" placeholder="เช่น เป็นรูปแบบไฟล์ที่ใช้สำหรับวัตถุสามมิติที่มีพิกัด 3D ">
+                                    </div>
+
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
+                                        <strong class="col-sm-12">รูปแบบ :<strong style="color:red;"> * </strong></strong><br>
+                                        <select class="form-control" name="formats">
+                                            <option value="" style="color:red;">--- กรุณาเลือกรูปแบบ --- </option>
+                                            <option value="2D">2D</option>
+                                            <option value="3D">3D</option>
+                                        </select>
                                     </div>
                             
                                     <div class="d-flex flex-row-reverse bd-highlight">
@@ -101,7 +108,8 @@
                                 <thead >
                                     <tr>
                                         <th>ลำดับ</th>
-                                        <th>ประเภทนามสกุลไฟล์</th>
+                                        <th>นามสกุลไฟล์</th>
+                                        <th>รูปแบบ</th>
                                         <th>คำอธิบาย</th>
                                         <th><center>แก้ไข</center></th>
                                         <th><center>ลบ</center></th>
@@ -111,8 +119,10 @@
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $typefile->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $row->name}}</td>
-                                        <td class="col-sm-6">{{ $row->description}}</td>
+                                        <td class="col-sm-2">{{ $row->name}}</td>
+                                        <td class="col-sm-2">{{ $row->formats}}</td>
+                                        <td class="col-sm-8">{{ $row->description}}</td>
+
                                         <td>
                                             <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/typefile/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>

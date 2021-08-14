@@ -23,6 +23,7 @@ class TypefileController extends Controller
             [
                 'name' => 'required|unique:typefile|max:10',
                 'description' => 'required|max:191',
+                'formats' => 'required',
             ],
             [
                 'name.required' => "กรุณาป้อนประเภทนามสกุลไฟล์",
@@ -31,11 +32,14 @@ class TypefileController extends Controller
 
                 'description.required' => "กรุณาป้อนคำอธิบาย",
                 'description.max' => "ห้ามป้อนคำอธิบายเกิน 191 ตัวอักษร",
+
+                'formats.required' => "กรุณาเลือกรูปแบบ",
             ]
         );
         $typefile = new TypefileModel;
         $typefile->name = Str::of($request->name)->upper(); //request string to upper
         $typefile->description = $request->description;
+        $typefile->formats = $request->formats;
         $typefile->save();
         // dd($request);
         session()->flash("success", "เพิ่มข้อมูลเรียนร้อย!");
@@ -55,7 +59,8 @@ class TypefileController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:10',
-                'name' => 'required|max:191',
+                'description' => 'required|max:191',
+                'formats' => 'required',
             ],
             [
                 'name.required' => "กรุณาป้อนประเภทนามสกุลไฟล์",
@@ -63,17 +68,21 @@ class TypefileController extends Controller
 
                 'description.required' => "กรุณาป้อนคำอธิบาย",
                 'description.max' => "ห้ามป้อนคำอธิบายเกิน 191 ตัวอักษร",
+
+                'formats.required' => "กรุณาป้อนคำอธิบาย",
             ]
         );
         $typefile = new TypefileModel;
         $typefile->name = Str::of($request->name)->upper(); //request string to upper
         $typefile->description = $request->description;
+        $typefile->formats = $request->formats;
 
         DB::table('typefile')
             ->where('id', '=', $id)
             ->update([
                 'name' =>  $typefile->name,
                 'description' => $request->description,
+                'formats' => $request->formats,
                 'updated_at' => now(),
             ]);
         // dd($request->all());

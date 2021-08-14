@@ -63,30 +63,29 @@
                                     </div>
                                 </div>
                            
-                                <form action="{{url('/category/store/')}}" method="post" enctype="multipart/form-data">
+                                <form action="{{url('/asset/store/')}}" method="post" enctype="multipart/form-data">
 
                                     {{csrf_field()}}
                                     <div class="form-group my-2">
                                         <strong class="col-sm-12">ชื่อชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label"  name="name_th" id="name_th" placeholder="เช่น ชื่อชิ้นงานที่จะอัพโหลด ">
+                                        <input type="text" class="col-sm-12 col-form-label"  name="display_name" id="display_name" placeholder="เช่น ชื่อชิ้นงานที่จะอัพโหลด ">
                                     </div>
 
                                     <div class="form-group my-4">
                                         <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
-                                        <input id="x" value="{{isset($posts)?"$posts->content":''}}" type="hidden" name="content">
+                                        <input id="x" value="{{isset($posts)?"$posts->content":''}}" type="hidden" name="description">
                                         <trix-editor input="x"></trix-editor>
                                     </div>
 
                                     <div class="form-group my-4">
                                         <strong class="col-sm-12">ราคา :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label"  name="name_th" id="name_th" placeholder="เช่น ชื่อชิ้นงานที่จะอัพโหลด ">
+                                        <input type="text" class="col-sm-12 col-form-label"  name="price" id="price" placeholder="เช่น ชื่อชิ้นงานที่จะอัพโหลด ">
                                     </div>
 
                                     <div class="form-group my-4">
-                                        {{-- {{$posts->category_id}} --}}
                                         <strong class="col-sm-12">หมวดหมู่ :<strong style="color:red;"> * </strong></strong><br>
-                                        <select class="form-control" name="category">
-                                            <option value="" style="color:red;">--- กรุณาเลือกหมวดหมู่ ---</option>
+                                        <select class="form-control" name="category_id">
+                                            <option value="" style="color:red;">--- กรุณาเลือกหมวดหมู่ --- </option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}"
                                                     @if(isset($posts))
@@ -99,37 +98,35 @@
                                         </select>
                                     </div>
 
-                                    @if($typefiles->count()>0)
                                     <div class="form-group my-4">
                                         <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
-                                        <select class="form-control js-example-basic-multiple" name="typefile[]" id="select-tags" multiple="multiple">
-                                                @foreach($typefiles as $typefile)
-                                                        <option value="{{$typefile->id}}"
-                                                          @if(isset($posts))
-                                                              @if($posts->hasTag($typefile->id))
-                                                                  selected
-                                                              @endif
-                                                          @endif
-                    
-                                                          >{{$typefile->name}}</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                    @endif
-
-                                    <div class="form-group my-4">
-                                        {{-- {{$posts->category_id}} --}}
-                                        <strong class="col-sm-12">รูปแบบชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
-                                        <select class="form-control" name="category">
-                                            <option value="" style="color:red;">--- กรุณาเลือกหมวดหมู่ ---</option>
-                                            @foreach($categories as $category)
-                                                <option value="{{$category->id}}"
+                                        <select class="form-control js-example-basic-multiple" name="typefile_id" id="select-tags">
+                                            <option value="" style="color:red;">--- กรุณาเลือกหมวดหมู่ ---</option>    
+                                            @foreach($typefiles as $typefile)
+                                                <option value="{{$typefile->id}}"
                                                     @if(isset($posts))
-                                                        @if($category->id == $posts->category_id)
+                                                        @if($posts->hasTag($typefile->id))
                                                             selected
                                                         @endif
                                                     @endif
-                                                >{{$category->name_th}} / {{$category->name_en}}</option>
+                                                >{{$typefile->formats}} / {{$typefile->name}}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group my-4">
+                                        <strong class="col-sm-12">ประเภทเผยเเพร่ :<strong style="color:red;"> * </strong></strong><br>
+                                        <select class="form-control js-example-basic-multiple" name="license_id" id="select-tags">
+                                            <option value="" style="color:red;">--- กรุณาเลือกประเภทเผยเเพร่ ---</option>    
+                                            @foreach($licenses as $license)
+                                                <option value="{{$license->id}}"
+                                                    @if(isset($posts))
+                                                        @if($posts->hasTag($license->id))
+                                                            selected
+                                                        @endif
+                                                    @endif
+                                                >{{$license->name_th}} / {{$license->name_en}}</option>
                                             @endforeach
                                         </select>
                                     </div>

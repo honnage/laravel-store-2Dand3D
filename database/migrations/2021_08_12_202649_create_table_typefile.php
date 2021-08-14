@@ -16,6 +16,7 @@ class CreateTableTypefile extends Migration
         Schema::create('typefile', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('formats');
             $table->string('description');
             $table->timestamps();
         });

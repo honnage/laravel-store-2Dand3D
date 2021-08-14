@@ -1,6 +1,6 @@
 
 <h1>single upload</h1>
-<form action="{{url('asset/upload/test/single-upload')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('test/upload/test/single-upload')}}" method="post" enctype="multipart/form-data">
     {{csrf_field()}}
 
     <div class="form-group my-4">
@@ -15,7 +15,7 @@
 
 
 <h1>multiple upload</h1>
-<form action="{{url('asset/upload/test/multiple-upload')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('test/upload/test/multiple-upload')}}" method="post" enctype="multipart/form-data">
     {{csrf_field()}}
 
     <div class="form-group my-4">

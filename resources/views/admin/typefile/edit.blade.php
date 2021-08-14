@@ -52,17 +52,30 @@
                            
                                 <form action="{{url('/typefile/update/'.$typefile_edit->id)}}" method="post" enctype="multipart/form-data">
                                     {{csrf_field()}}
-                                    <div class="row form-inline">
-                                        <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
-                                            <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label"  name="name" id="name" value="{{ $typefile_edit->name }}">
-                                        </div>
-            
-                                        <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
-                                            <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label" name="description" id="description" value="{{ $typefile_edit->description }}">
-                                        
-                                        </div>
+                        
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
+                                        <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
+                                        <input type="text" class="col-sm-12 col-form-label"  name="name" id="name"  value="{{ $typefile_edit->name }}">
+                                    </div>
+        
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
+                                        <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
+                                        <input type="text" class="col-sm-12 col-form-label" name="description" id="description" value="{{ $typefile_edit->description }}">
+                                    </div>
+
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
+                                    
+                                        <strong class="col-sm-12">หมวดหมู่ :<strong style="color:red;"> * </strong></strong><br>
+                                        <select class="form-control" name="formats">
+                                            <option value="{{ $typefile_edit->formats }}" style="color:red;">{{ $typefile_edit->formats }}</option>
+                                            @if($typefile_edit->formats == "3D")
+                                                <option name="formats" value="2D">2D</option>
+                                            @endif
+                                     
+                                            @if($typefile_edit->formats == "2D")
+                                                <option name="formats" value="3D">3D</option>
+                                            @endif
+                                        </select>
                                     </div>
                             
                                     <div class="d-flex flex-row-reverse bd-highlight">
@@ -101,19 +114,20 @@
                                 <thead >
                                     <tr>
                                         <th>ลำดับ</th>
-                                        <th>ประเภทนามสกุลไฟล์</th>
+                                        <th>นามสกุลไฟล์</th>
+                                        <th>รูปแบบ</th>
                                         <th>คำอธิบาย</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                @foreach($typefile as $tf)
+                                @foreach($typefile as $row)
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $typefile->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $tf->name}}</td>
-                                        <td class="col-sm-6">{{ $tf->description}}</td>
-                                  
+                                        <td class="col-sm-2">{{ $row->name}}</td>
+                                        <td class="col-sm-2">{{ $row->formats}}</td>
+                                        <td class="col-sm-8">{{ $row->description}}</td>
                                     </tr>
                                 </tbody>
                                 @endforeach

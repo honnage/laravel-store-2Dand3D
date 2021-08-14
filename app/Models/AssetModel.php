@@ -15,7 +15,6 @@ class AssetModel extends Model
         'image',
         'asset',
         'price',
-        'formats',
         'category_id',
         'typefile_id',
         'license_id',

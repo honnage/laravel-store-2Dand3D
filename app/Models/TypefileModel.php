@@ -10,6 +10,7 @@ class TypefileModel extends Model
     protected $table = "typefile";
     protected $fillable = [
         'name',
+        'formats',
         'description'
     ];
 

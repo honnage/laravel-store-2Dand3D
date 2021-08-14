@@ -107,13 +107,12 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                @foreach($category as $cg)
+                                @foreach($category as $row)
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $category->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $cg->name_th}}</td>
-                                        <td class="col-sm-6">{{ $cg->name_en}}</td>
-                                  
+                                        <td class="col-sm-6">{{ $row->name_th}}</td>
+                                        <td class="col-sm-6">{{ $row->name_en}}</td>
                                     </tr>
                                 </tbody>
                                 @endforeach

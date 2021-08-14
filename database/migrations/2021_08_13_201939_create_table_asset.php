@@ -21,7 +21,6 @@ class CreateTableAsset extends Migration
             $table->string('image');
             $table->string('asset');
             $table->decimal('price',8,2); //สูงสุด 8 หลัก ทศนิยม 2 ตำแหน่ง
-            $table->integer('formats');
             $table->integer('category_id');
             $table->integer('typefile_id');
             $table->integer('license_id');

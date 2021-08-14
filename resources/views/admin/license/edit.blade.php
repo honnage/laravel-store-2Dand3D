@@ -106,13 +106,12 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                @foreach($license as $lc)
+                                @foreach($license as $row)
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $license->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $lc->name_th}}</td>
-                                        <td class="col-sm-6">{{ $lc->name_en}}</td>
-                                  
+                                        <td class="col-sm-6">{{ $row->name_th}}</td>
+                                        <td class="col-sm-6">{{ $row->name_en}}</td>
                                     </tr>
                                 </tbody>
                                 @endforeach

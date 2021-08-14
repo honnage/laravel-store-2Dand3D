@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TypefileController;
 use App\Http\Controllers\LicenseController;
@@ -44,12 +45,13 @@ Route::get('license/search/',[LicenseController::class, 'search_datatable']);
 
 // AssetController
 Route::get('asset/upload',[AssetController::class,'upload']);
+Route::post('asset/store',[AssetController::class,'store']);
 
-Route::get('asset/test',[AssetController::class,'test']);
-Route::post('asset/upload/test/single-upload',[AssetController::class,'single_upload']);
-Route::post('asset/upload/test/multiple-upload',[AssetController::class,'multiple_upload']);
+// TestController
+Route::get('test/show-model',[TestController::class,'test_show_model']);
+Route::get('test/uploadfile',[TestController::class,'test_uploadfile']);
+Route::post('test/upload/test/single-upload',[TestController::class,'single_upload']);
+Route::post('test/upload/test/multiple-upload',[TestController::class,'multiple_upload']);
 
-Route::get('asset/edit/{id}',[AssetController::class,'edit']);
-Route::post('asset/update/{id}',[AssetController::class, 'update']);
-Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
-Route::get('asset/search/',[AssetController::class, 'search_datatable']);
+
+
