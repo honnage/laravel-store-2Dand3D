@@ -39,6 +39,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
 
+        {{-- 3D --}}
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <link rel="stylesheet" href="{{ asset('css/layouts/style _showmodel.css') }}">
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+        <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+
         <script type="text/javascript"> 
             $(function(){
                  //Sliding effect just replace fadeOut() to slideUp()

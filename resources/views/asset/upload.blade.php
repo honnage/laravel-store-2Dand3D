@@ -32,14 +32,8 @@
                                 <i class="fas fa-chart-bar me-1"></i>
                                 รายละเอียด
                             </div>
-                            <div class="card-body">
-                                @if (session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-                           
-                                
+                            <div class="card-body" style="background: #17C2A6">
+                                 <model-viewer src="{{ asset('assets/Drossel.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>3D Model Website</title>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/layouts/style _showmodel.css') }}">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
 </head>
@@ -13,7 +13,7 @@
     <div id="container">
         <div id="navbar">
             <div id="logo">
-                <img src="assets/logo.png" alt="">
+                <img src="{{ asset('assets/logo.png') }}" alt="">
             </div>
             <ul>
                 <li class="active"><a href="#">Home</a></li>
@@ -24,8 +24,8 @@
             </ul>
         </div>
         <div id="aSide">
-            <img src="assets/background.png" alt="">
-            <model-viewer src="assets/Drossel.gltf" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
+            <img src="{{ asset('assets/background.png') }}" alt="">
+            <model-viewer src="{{ asset('assets/Drossel.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
         </div>
         <div id="content">
             <h2>ROBOT MODEL</h2>
