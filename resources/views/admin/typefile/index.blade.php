@@ -133,9 +133,6 @@
                             <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลประเภทนามสกุลไฟล์ --</h3>
                         @endif
 
-                        <div class="d-flex flex-row-reverse bd-highlight my-4">
-                            <a href="/typefile"  class="btn btn-outline-dark col-sm-1">ย้อนกลับ</a>
-                        </div>
                     </div>
                 </div>
             </div>

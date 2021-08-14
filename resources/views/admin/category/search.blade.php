@@ -119,7 +119,7 @@
                                         <td>
                                             <form class="delete_form" action="{{url('/category/destroy/'.$row->id)}}" method="post">
                                                 {{csrf_field()}}
-                                                <a style="color:white; width: 50px" data-name="{{$row->name}}" class="btn btn-danger deleteform"><i class="fas fa-trash-alt"></i></a>
+                                                <a style="color:white; width: 50px" data-name="{{$row->name_en}}" class="btn btn-danger deleteform"><i class="fas fa-trash-alt"></i></a>
                                             </form>
                                         </td>
                                     </tr>

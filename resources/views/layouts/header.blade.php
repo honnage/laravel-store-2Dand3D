@@ -36,6 +36,9 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
+
         <script type="text/javascript"> 
             $(function(){
                  //Sliding effect just replace fadeOut() to slideUp()
@@ -58,10 +61,10 @@
                 });
             })
 
-            $(document).ready(function() {
-                $('#select-tags').select2();
-                $('.js-example-basic-multiple').select2();
-            });
+            // $(document).ready(function() {
+            //     $('#select-tags').select2();
+            //     $('.js-example-basic-multiple').select2();
+            // });
 
         </script>
 
@@ -80,11 +83,16 @@
                 </div>
                 
             </form>
-            <form class="navbar-nav ml-auto ms-md-0 me-3 me-lg-4">
-                <a href="{{url('/asset/upload')}}" style="color: white">
-                    <i class="fas fa-upload"></i>
-                </a>
-            </form>
+            @guest
+             
+            @else
+                <form class="navbar-nav ml-auto ms-md-0 me-3 me-lg-4">
+                    <a href="{{url('/asset/upload')}}" style="color: white">
+                        <i class="fas fa-upload"></i>
+                    </a>
+                </form>
+            @endguest
+
             <!-- Navbar-->
             <ul class="navbar-nav ml-auto ms-md-0 me-3 me-lg-4">
                 <!-- Authentication Links -->
@@ -101,7 +109,9 @@
                     @endif --}}
                 @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                            <i class="fas fa-user fa-fw"></i>
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li> 
                                 <span class="dropdown-item">

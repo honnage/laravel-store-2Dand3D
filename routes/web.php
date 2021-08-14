@@ -44,7 +44,11 @@ Route::get('license/search/',[LicenseController::class, 'search_datatable']);
 
 // AssetController
 Route::get('asset/upload',[AssetController::class,'upload']);
-Route::post('asset/upload',[AssetController::class,'store']);
+
+Route::get('asset/test',[AssetController::class,'test']);
+Route::post('asset/upload/test/single-upload',[AssetController::class,'single_upload']);
+Route::post('asset/upload/test/multiple-upload',[AssetController::class,'multiple_upload']);
+
 Route::get('asset/edit/{id}',[AssetController::class,'edit']);
 Route::post('asset/update/{id}',[AssetController::class, 'update']);
 Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
