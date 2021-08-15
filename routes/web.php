@@ -51,6 +51,7 @@ Route::post('asset/store',[AssetController::class,'store']);
 Route::get('test/show-model',[TestController::class,'test_show_model']);
 Route::get('test/upload/model',[TestController::class,'test_upload_model']);
 Route::post('test/upload/model/single-upload',[TestController::class,'single_upload_model']);
+Route::post('test/upload/model/multiple-upload',[TestController::class,'multiple_upload_model']);
 
 Route::get('test/uploadfile',[TestController::class,'test_uploadfile']);
 Route::post('test/upload/test/single-upload',[TestController::class,'single_upload']);

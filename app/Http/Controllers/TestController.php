@@ -61,4 +61,24 @@ class TestController extends Controller
         return view('testpage.model_success1')->with($data);
     }
 
+    public function multiple_upload_model(Request $request){
+        $modelInfos = array();
+        if($request->hasFile('models')){
+            $models = $request->file('models');
+            foreach($models as $model){
+                array_push($modelInfos, array(
+                    'fileName' => $model->getClientOriginalName(),
+                    'fileType' => $model->getClientOriginalExtension(),
+                    'fileSize' => $model->getSize(),
+                ));
+                $model->move(public_path('models'),  $model->getClientOriginalName());
+            }
+        }
+        $data = array(
+            'models' => $modelInfos
+        );
+        return view('testpage.model_success2')->with($data);
+    }
+
+    
 }

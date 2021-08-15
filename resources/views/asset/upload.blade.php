@@ -33,7 +33,9 @@
                                 รายละเอียด
                             </div>
                             <div class="card-body" style="background: #17C2A6">
-                                 <model-viewer src="{{ asset('assets/Drossel.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
+                                <model-viewer src="{{ asset('models/crocodile/scene.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
+                                {{-- <model-viewer src="{{ asset('models/nissan/scene.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
+                                 {{-- <model-viewer src="{{ asset('assets/Drossel.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
                             </div>
                         </div>
                     </div>
