@@ -134,7 +134,12 @@
 
                                     <div class="form-group my-4">
                                         <strong class="col-sm-12">ไฟล์ชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="file" name="image" value="" class="form-control">
+                                        <input type="file" name="asset" value="" class="form-control">
+                                    </div>
+
+                                    <div class="form-group my-4">
+                                        <strong class="col-sm-12">แสดงตัวอย่างโมเดลสำหรับไฟล์ gltf หรือ glb :</strong><br>
+                                        <input type="file" name="path_model" value="" class="form-control">
                                     </div>
 
                                     <div class="d-flex flex-row-reverse bd-highlight">
