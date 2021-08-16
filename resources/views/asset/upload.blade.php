@@ -33,7 +33,7 @@
                                 รายละเอียด
                             </div>
                             <div class="card-body" style="background: #17C2A6">
-                                <model-viewer src="{{ asset('models/crocodile/scene.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
+                                <model-viewer src="{{ asset('models/u1_1708279487102968.glb') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
                                 {{-- <model-viewer src="{{ asset('models/nissan/scene.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
                                  {{-- <model-viewer src="{{ asset('assets/Drossel.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
                             </div>
@@ -139,7 +139,7 @@
 
                                     <div class="form-group my-4">
                                         <strong class="col-sm-12">แสดงตัวอย่างโมเดลสำหรับไฟล์ gltf หรือ glb :</strong><br>
-                                        <input type="file" name="path_model" value="" class="form-control">
+                                        <input type="file" name="model" value="" class="form-control">
                                     </div>
 
                                     <div class="d-flex flex-row-reverse bd-highlight">
