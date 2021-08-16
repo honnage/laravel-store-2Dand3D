@@ -67,8 +67,8 @@ class AssetController extends Controller
         $image_ext = strtolower($image->getClientOriginalExtension()); 
         $image_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อภาพ
         $image_location = "images/";
-        $image_path = $image_location.$image_gen;
-
+        // $image_path = $image_location.$image_gen;
+        $image_path = $request->asset->store($asset_path); //เก็บไฟล์ขึ้น serve
      
         //upload asset
         $asset = $request->file('asset'); 
@@ -111,9 +111,11 @@ class AssetController extends Controller
         // dd($asset);
         $asset->save();
 
-        $request->file('image')->move(public_path($image_location), $image_path.".".$image_ext);
-        $request->file('asset')->move(public_path($asset_location), $asset_path.".".$asset_ext);
-        $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
+     
+
+        // $request->file('image')->move(public_path($image_location), $image_path.".".$image_ext);
+        // $request->file('asset')->move(public_path($asset_location), $asset_path.".".$asset_ext);
+        // $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
         
         return redirect('/');
 

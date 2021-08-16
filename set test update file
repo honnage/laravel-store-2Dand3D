@@ -1,0 +1,25 @@
+[33mf29eef4[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m update asset test upload file to public
+[33mfd986bc[m test update file to storage
+[33md35c819[m asset test update file
+[33m32aa403[m test upload file
+[33m88e0eec[m[33m ([m[1;31morigin/dev[m[33m, [m[1;31mheroku/master[m[33m)[m upload file model and show model
+[33maef860f[m test showdowl by view upload
+[33m739dd20[m update typefile and asset view upload
+[33me9765b1[m test upload file
+[33m485f02a[m form asset and relationship data model
+[33m391eb06[m create model controller data table by asset
+[33mb87296e[m user and edit button
+[33m8f5ab3f[m license
+[33mee9b832[m slideToggle_table edit view typefile
+[33mba60140[m slideToggle_table edit view category
+[33maa9313d[m search data table category and validate name is string to lower
+[33m830d5f9[m search data table typefile and validate name is string to upper
+[33mde3385d[m typefile
+[33m122fd99[m sweetalert delete
+[33m612913d[m Category
+[33m19edd59[m Template
+[33mb2295e0[m Vaildate User
+[33m9c6254c[m Setup Database
+[33ma4f9c60[m[33m ([m[1;31mheroku/dev[m[33m)[m Procfile for Heroku
+[33m765ea3d[m UI
+[33m9640763[m Project store 2D and 3D
