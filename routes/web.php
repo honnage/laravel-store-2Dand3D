@@ -44,6 +44,7 @@ Route::post('license/destroy/{id}',[LicenseController::class, 'destroy']);
 Route::get('license/search/',[LicenseController::class, 'search_datatable']);
 
 // AssetController
+Route::get('asset',[AssetController::class,'index']);
 Route::get('asset/upload',[AssetController::class,'upload']);
 Route::post('asset/store',[AssetController::class,'store']);
 

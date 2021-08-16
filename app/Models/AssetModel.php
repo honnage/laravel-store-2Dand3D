@@ -28,7 +28,7 @@ class AssetModel extends Model
     }
 
     public function typefile(){
-        return $this->belongsToMany(TypefileModel::class);
+        return $this->belongsTo(TypefileModel::class);
     }
 
     public function license(){

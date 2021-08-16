@@ -20,9 +20,9 @@ class CreateTableAsset extends Migration
             $table->string('description');
             $table->string('image');
             $table->string('asset');
-            $table->string('model_path');
-            $table->string('model_type');
-            $table->string('model_size');
+            $table->string('model_path')->nullable();
+            $table->string('model_type')->nullable();
+            $table->string('model_size')->nullable();
             $table->decimal('price',8,2); //สูงสุด 8 หลัก ทศนิยม 2 ตำแหน่ง
             $table->integer('category_id');
             $table->integer('typefile_id');
