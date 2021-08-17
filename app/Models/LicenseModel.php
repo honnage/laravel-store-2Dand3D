@@ -14,6 +14,6 @@ class LicenseModel extends Model
     ];
 
     public function asset(){
-        return $this->hasMany(AssetModel::class);
+        return $this->hasMany(AssetModel::class, 'license_id');     
     }
 }

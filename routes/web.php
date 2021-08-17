@@ -8,13 +8,15 @@ use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AssetController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
-
+Route::get('/',[AssetController::class,'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//admin
 
 // UsersController
 Route::get('users',[UsersController::class,'index']);
@@ -47,6 +49,11 @@ Route::get('license/search/',[LicenseController::class, 'search_datatable']);
 Route::get('asset',[AssetController::class,'index']);
 Route::get('asset/upload',[AssetController::class,'upload']);
 Route::post('asset/store',[AssetController::class,'store']);
+Route::get('asset/edit/{id}',[AssetController::class,'edit']);
+Route::post('asset/update/{id}',[AssetController::class, 'update']);
+Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
+
+Route::get('asset/dashboard/',[AssetController::class,'dashboard_admin']);
 
 // TestController
 Route::get('test/show-model',[TestController::class,'test_show_model']);

@@ -126,7 +126,7 @@
                             </li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="#!">บัญชีของฉัน</a></li>
-                            <li><a class="dropdown-item" href="#!">ผลงานของฉัน</a></li>
+                            <li><a class="dropdown-item" href="{{url('/asset/dashboard/'.Auth::user()->id)}}">ผลงานของฉัน</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -157,7 +157,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{url('/asset')}}">ชิ้นงานในระบบ</a>
+                                    <a class="nav-link" href="{{url('/asset/dashboard')}}">ชิ้นงานในระบบ</a>
                                     <a class="nav-link" href="{{url('/users')}}">ผู้ใช้งาน</a>
                                     <a class="nav-link" href="{{url('/category')}}">หมวดหมู่</a>
                                     <a class="nav-link" href="{{url('/typefile')}}">ประเภทไฟล์</a>

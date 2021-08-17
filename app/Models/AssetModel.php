@@ -36,4 +36,8 @@ class AssetModel extends Model
     public function license(){
         return $this->belongsTo(LicenseModel::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

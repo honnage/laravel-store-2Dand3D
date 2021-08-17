@@ -68,7 +68,7 @@ class CategoryController extends Controller
         $category = new CategoryModel;
         $category->name_th = $request->name_th;
         $category->name_en = Str::of($request->name_en)->lower(); //request string to upper
-        
+
         DB::table('category')
             ->where('id', '=', $id)
             ->update([
@@ -100,7 +100,7 @@ class CategoryController extends Controller
         $query = CategoryModel::query();
         $columns = ['name_th', 'name_en'];
 
-        foreach($columns as $column){
+        foreach ($columns as $column) {
             $query->orWhere($column, 'LIKE', '%' . $search . '%');
         }
 

@@ -15,25 +15,40 @@ use ZanySoft\Zip\Zip;
 
 class AssetController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $asset = AssetModel::all();
         return view('asset.index', compact('asset'));
     }
 
-    public function upload()
-    {
-        // $users = DB::table('users')->paginate(10);
+    public function dashboard_admin(){
+        $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(10);  
+        return view('admin.asset.dashboard', compact('asset'));
+    }
+
+
+    public function dashboard_user($id){
+        $asset = AssetModel::all();
+        return view('asset.index', compact('asset'));
+    }
+
+    public function edit($id){
         $user = Auth::user();
         $categories = CategoryModel::all();
         $typefiles = TypefileModel::all();
         $licenses = LicenseModel::all();
-        // dd($category);
+        $asset = AssetModel::all();
         return view('asset.upload', compact('user', 'categories', 'typefiles', 'licenses'));
     }
 
-    public function store(Request $request)
-    {
+    public function upload(){
+        $user = Auth::user();
+        $categories = CategoryModel::all();
+        $typefiles = TypefileModel::all();
+        $licenses = LicenseModel::all();
+        return view('asset.upload', compact('user', 'categories', 'typefiles', 'licenses'));
+    }
+
+    public function store(Request $request){
         // ตรวจสอบข้อมูล
         $request->validate(
             [
@@ -62,23 +77,22 @@ class AssetController extends Controller
             ]
         );
 
-        //upload image
+        // upload image
         $image = $request->file('image'); //เข้ารหัสรูปภาพ ฐาน10
         $image_ext = strtolower($image->getClientOriginalExtension()); 
         $image_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อภาพ
         $image_location = "images/";
-        // $image_path = $image_location.$image_gen;
-        $image_path = $request->asset->store($asset_path); //เก็บไฟล์ขึ้น serve
-     
-        //upload asset
+        $image_path = $image_location.$image_gen;
+
+        // upload asset
         $asset = $request->file('asset'); 
         $asset_ext = strtolower($asset->getClientOriginalExtension()); // ดึงนามสกุลไฟล์ภาพ
         $asset_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อภาพ
         $asset_location = "assets/";
         $asset_path  = $asset_location.$asset_gen;
         $asset_size = $asset->getSize();
+  
 
- 
         $asset = new AssetModel;
         $asset->user_id = Auth::user()->id;
         $asset->display_name = $request->display_name;
@@ -87,6 +101,7 @@ class AssetController extends Controller
         $asset->category_id = $request->category_id;
         $asset->typefile_id = $request->typefile_id;
         $asset->license_id = $request->license_id;
+        $asset->image = $image_path.".".$image_ext;
 
         $asset->asset_size  =  $asset_size;
         $asset->asset_type  =  $asset_ext;
@@ -99,54 +114,20 @@ class AssetController extends Controller
             $model_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อ
             $model_location = "models/";
             $model_path  = $model_location.$model_gen; 
-
+      
             $model_size = $model->getSize();
             $asset->model_size = $model_size;
             $asset->model_type = $model_ext;
             $asset->model_path = $model_path.".".$model_ext;
         }
 
-        $asset->image = $image_path.".".$image_ext;
-
         // dd($asset);
         $asset->save();
 
-     
-
-        // $request->file('image')->move(public_path($image_location), $image_path.".".$image_ext);
-        // $request->file('asset')->move(public_path($asset_location), $asset_path.".".$asset_ext);
-        // $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
+        $request->file('image')->move(public_path($image_location), $image_path.".".$image_ext);
+        $request->file('asset')->move(public_path($asset_location), $asset_path.".".$asset_ext);
+        $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
         
         return redirect('/');
-
-        // // upload asset
-        
-       
-
-        // dd($asset);
-
-        // DB::table('asset')->insert([
-        //     'user_id' =>  $asset->user_id,
-        //     'display_name' => $asset->display_name,
-        //     'image' =>  $asset->image,
-        //     'asset' =>   $asset->asset_path,
-        //     'asset_path' => 'kayla@example.com',
-        //     'asset_type' => 'kayla@example.com',
-        //     'asset_size' => 'kayla@example.com',
-        //     'model_path' => 'kayla@example.com',
-        //     'model_type' => 'kayla@example.com',
-        //     'model_size' => 'kayla@example.com',
-        //     'price' => 'kayla@example.com',
-        //     'category_id' => 'kayla@example.com',
-        //     'typefile_id' => 'kayla@example.com',
-        //     'license_id' => 'kayla@example.com',
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // $asset_upload = $request->asset->store($asset_path); //เก็บไฟล์ขึ้น serve
-        // ]);
- 
-       
-        // session()->flash("success", "เพิ่มข้อมูลเรียนร้อย!");
-        // 
     }
 }

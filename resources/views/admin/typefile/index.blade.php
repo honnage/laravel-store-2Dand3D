@@ -111,6 +111,7 @@
                                         <th>นามสกุลไฟล์</th>
                                         <th>รูปแบบ</th>
                                         <th>คำอธิบาย</th>
+                                        <th>จำนวน</th>
                                         <th><center>แก้ไข</center></th>
                                         <th><center>ลบ</center></th>
                                     </tr>
@@ -120,8 +121,9 @@
                                     <tr>
                                         <td><b>{{ $typefile->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-2">{{ $row->name}}</td>
-                                        <td class="col-sm-2">{{ $row->formats}}</td>
+                                        <td class="col-sm-1">{{ $row->formats}}</td>
                                         <td class="col-sm-8">{{ $row->description}}</td>
+                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
                                         <td>
                                             <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/typefile/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>

@@ -105,6 +105,7 @@
                                         <th>ลำดับ</th>
                                         <th>หมวดหมู่ สำหรับภาษาไทย</th>
                                         <th>หมวดหมู่ สำหรับภาษาอังกฤษ</th>
+                                        <th>จำนวน</th>
                                         <th><center>แก้ไข</center></th>
                                         <th><center>ลบ</center></th>
                                     </tr>
@@ -113,8 +114,9 @@
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $category->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-6">{{ $row->name_th}}</td>
-                                        <td class="col-sm-6">{{ $row->name_en}}</td>
+                                        <td class="col-sm-5">{{ $row->name_th}}</td>
+                                        <td class="col-sm-5">{{ $row->name_en}}</td>
+                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
                                         <td>
                                             <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/category/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>
