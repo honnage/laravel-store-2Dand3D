@@ -46,4 +46,12 @@ class User extends Authenticatable
     public function asset(){
         return $this->hasMany(AssetModel::class, 'user_id');   
     }
+
+    public function checkIsStatus(){
+        return $this->isStatus;
+    }
+
+    public function checkID(){
+        return $this->id;
+    }
 }
