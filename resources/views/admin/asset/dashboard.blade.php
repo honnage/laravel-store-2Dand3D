@@ -60,7 +60,8 @@
                                     <tr>
                                         <th>ลำดับ</th>
                                         <th><center>รูปภาพ</center></th>
-                                        <th><center>ผู้้เผยแพร่</center></th>
+                                        <th><center>โมเดล</center></th>
+                                        <th><center>ผู้เผยแพร่</center></th>
                                         <th><center>ชื่อชิ้นงาน</center></th>
                                         <th><center>หมวดหมู่</center></th>
                                         <th><center>ประเภทนามสกุลไฟล์</center></th>
@@ -72,9 +73,10 @@
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $asset->firstItem()+$loop->index}}</b></td>
-                                        <td><img src="{{url($row->image)}}"  width="80px" height="80px"></td> 
+                                        <td class="col-sm-1"><img src="{{url($row->image)}}"  width="200px" height="150px"></td> 
+                                        <td class="col-sm-1"><model-viewer src="{{url($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
                                         <td class="col-sm-2">{{ $row->user->firstname}} {{ $row->user->lastname}}</td> 
-                                        <td class="col-sm-3">{{ $row->display_name}}</td> 
+                                        <td class="col-sm-4">{{ $row->display_name}}</td> 
                                         <td class="col-sm-2"><center>{{ $row->category->name_th}}<center></td> 
                                         <td class="col-sm-2"><center>{{ $row->typefile->name}} / {{ $row->typefile->formats}}</center></td> 
                                         <td class="col-sm-1" style="text-align:right;">{{ number_format( $row->price )}}</td>

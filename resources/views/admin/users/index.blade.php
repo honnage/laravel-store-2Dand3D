@@ -27,61 +27,16 @@
                 <div class="col-xl-12 my-2">
                     <div class="d-flex justify-content-between">
                         <div class=" flex-row-reverse  ">
-                            <h1 class="text-left">ประเภทนามสกุลไฟล์</h1>
-                        </div>
-                        <div class="d-flex flex-row-reverse  ">
-                            <button href="#" class=" slideToggle_table btn btn-outline-success" >ฟอร์มข้อมูล </button>
-                            {{-- <button href="#" class="slideToggle_table btn btn-outline-success" >กราฟ </button> --}}
+                            <h1 class="text-left">ผู้ใช้งานในระบบ</h1>
                         </div>
                     </div>
                 </div>
-                
-                <div class="row">
-                    <div class="col-xl-12 my-2">
-                        <div class="card mb-4"  id="form_data" style="display:none;">
-                            <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                เพื่มประเภทนามสกุลไฟล์
-                            </div>
-                            <div class="card-body">
-                                @if (session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-                           
-                                <form action="{{url('/users/store/')}}" method="post" enctype="multipart/form-data">
-
-                                    {{csrf_field()}}
-                                    <div class="row form-inline">
-                                        <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
-                                            <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label"  name="name" id="name" placeholder="เช่น odj ">
-                                        </div>
-            
-                                        <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
-                                            <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label" name="description" id="description" placeholder="เช่น เป็นรูปแบบไฟล์ที่ใช้สำหรับวัตถุสามมิติที่มีพิกัด 3D ">
-                                        
-                                        </div>
-                                    </div>
-                            
-                                    <div class="d-flex flex-row-reverse bd-highlight">
-                                        <button type="submit" name="submit" class="btn btn-success col-sm-2">เพิ่มข้อมูล</button>
-                                        &nbsp;&nbsp;
-                                        <button class="btn btn-secondary col-sm-1" type="reset">ยกเลิก</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+    
                 <div class="card mb-4">
                     <div class="card-header" style="background: rgb(65, 62, 57); color: white">
                         <label class="my-2">
                             <i class="fas fa-table me-1"></i>
-                            <span>ตารางข้อมูล ประเภทนามสกุลไฟล์</span> 
+                            <span>ตารางข้อมูล ผู้ใช้งานในระบบ</span> 
                         </label>
                        
                         <label  class="float-end my-2">
@@ -103,6 +58,7 @@
                                         <th>ลำดับ</th>
                                         <th>ชื่อจริง - นามสกุล</th>
                                         <th>อีเมล</th>
+                                        <th>จำนวนผลงาน</th>
                                         <th>สถานะ</th>
                                         <th><center>แก้ไขสิทธิ์</center></th>
                                         <th><center>รายละเอียด</center></th>
@@ -114,7 +70,14 @@
                                         <td><b>{{ $users->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-4">{{ $row->firstname}} {{ $row->lastname}}</td>
                                         <td class="col-sm-4">{{ $row->email}}</td>
-                                        <td class="col-sm-2">{{ $row->isStatus}}</td>
+                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
+                                        <td class="col-sm-2">
+                                            @if($row->isStatus == 10 || $row->id == 1)
+                                                ผู้ดูแลระบบ
+                                            @else
+                                                {{ $row->isStatus}}
+                                            @endif
+                                        </td>
                                         <td>
                                             <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/users/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>

@@ -5,18 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Models\AssetModel;
 use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
 
-use ZanySoft\Zip\Zip;
-
 class AssetController extends Controller
 {
     public function index(){
-        $asset = AssetModel::all();
+        $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(16);  
         return view('asset.index', compact('asset'));
     }
 
@@ -31,14 +28,6 @@ class AssetController extends Controller
         return view('asset.index', compact('asset'));
     }
 
-    public function edit($id){
-        $user = Auth::user();
-        $categories = CategoryModel::all();
-        $typefiles = TypefileModel::all();
-        $licenses = LicenseModel::all();
-        $asset = AssetModel::all();
-        return view('asset.upload', compact('user', 'categories', 'typefiles', 'licenses'));
-    }
 
     public function upload(){
         $user = Auth::user();
@@ -76,7 +65,6 @@ class AssetController extends Controller
                 'asset.mimes' => "นามสกุลต้องเป็น jpg jpeg png zip rar",
             ]
         );
-
         // upload image
         $image = $request->file('image'); //เข้ารหัสรูปภาพ ฐาน10
         $image_ext = strtolower($image->getClientOriginalExtension()); 
@@ -87,13 +75,13 @@ class AssetController extends Controller
         // upload asset
         $asset = $request->file('asset'); 
         $asset_ext = strtolower($asset->getClientOriginalExtension()); // ดึงนามสกุลไฟล์ภาพ
-        $asset_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อภาพ
+        $asset_gen = hexdec(uniqid()); //Generate ชื่อภาพ
         $asset_location = "assets/";
-        $asset_path  = $asset_location.$asset_gen;
+        $asset_path  = $asset_location."u".Auth::user()->id."_".$asset_gen;
         $asset_size = $asset->getSize();
   
-
         $asset = new AssetModel;
+        // $asset->asset_id = "U".Auth::user()->id."A".$asset_gen;
         $asset->user_id = Auth::user()->id;
         $asset->display_name = $request->display_name;
         $asset->description = $request->description;
@@ -102,7 +90,6 @@ class AssetController extends Controller
         $asset->typefile_id = $request->typefile_id;
         $asset->license_id = $request->license_id;
         $asset->image = $image_path.".".$image_ext;
-
         $asset->asset_size  =  $asset_size;
         $asset->asset_type  =  $asset_ext;
         $asset->asset_path = $asset_path.".".$asset_ext;
@@ -120,14 +107,21 @@ class AssetController extends Controller
             $asset->model_type = $model_ext;
             $asset->model_path = $model_path.".".$model_ext;
         }
-
         // dd($asset);
         $asset->save();
-
         $request->file('image')->move(public_path($image_location), $image_path.".".$image_ext);
         $request->file('asset')->move(public_path($asset_location), $asset_path.".".$asset_ext);
         $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
         
         return redirect('/');
+    }
+
+    public function edit($id){
+        $user = Auth::user();
+        $categories = CategoryModel::all();
+        $typefiles = TypefileModel::all();
+        $licenses = LicenseModel::all();
+        $asset = AssetModel::all();
+        return view('asset.upload', compact('user', 'categories', 'typefiles', 'licenses'));
     }
 }

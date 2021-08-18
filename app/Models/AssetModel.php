@@ -10,6 +10,7 @@ class AssetModel extends Model
     protected $table = "asset";
     protected $fillable = [
         'user_id',
+        // 'asset_id',
         'display_name',
         'description',
         'image',
@@ -20,6 +21,7 @@ class AssetModel extends Model
         'model_type',
         'model_size',
         'price',
+        'status_show',
         'category_id',
         'typefile_id',
         'license_id',

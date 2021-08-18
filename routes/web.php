@@ -51,6 +51,7 @@ Route::get('asset/upload',[AssetController::class,'upload']);
 Route::post('asset/store',[AssetController::class,'store']);
 Route::get('asset/edit/{id}',[AssetController::class,'edit']);
 Route::post('asset/update/{id}',[AssetController::class, 'update']);
+Route::get('asset/show/{id}',[AssetController::class,'show']);
 Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
 
 Route::get('asset/dashboard/',[AssetController::class,'dashboard_admin']);

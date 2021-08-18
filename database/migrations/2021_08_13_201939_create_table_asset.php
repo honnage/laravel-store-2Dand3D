@@ -17,6 +17,7 @@ class CreateTableAsset extends Migration
         Schema::create('asset', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            // $table->string('asset_id');
             $table->string('display_name');
             $table->string('description');
             $table->string('image');
@@ -27,6 +28,7 @@ class CreateTableAsset extends Migration
             $table->string('model_type')->nullable();
             $table->integer('model_size')->nullable();
             $table->decimal('price',8,2); //สูงสุด 8 หลัก ทศนิยม 2 ตำแหน่ง
+            $table->string('status_show')->default(0);
             $table->integer('category_id');
             $table->integer('typefile_id');
             $table->integer('license_id');
