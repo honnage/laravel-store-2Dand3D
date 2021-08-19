@@ -102,6 +102,7 @@
                                         <th>ลำดับ</th>
                                         <th>ประเภทเผยเเพร่ สำหรับภาษาไทย</th>
                                         <th>ประเภทเผยเเพร่ สำหรับภาษาอังกฤษ</th>
+                                        <th>จำนวน</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -112,6 +113,7 @@
                                         <td><b>{{ $license->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-6">{{ $row->name_th}}</td>
                                         <td class="col-sm-6">{{ $row->name_en}}</td>
+                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
                                     </tr>
                                 </tbody>
                                 @endforeach

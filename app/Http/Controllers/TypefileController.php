@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TypefileModel;
+use App\Models\AssetModel;
+use App\Models\CategoryModel;
+use App\Models\LicenseModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -11,9 +14,13 @@ class TypefileController extends Controller
 {
     public function index()
     {
-        $path = "category";
         $typefile = TypefileModel::orderBy('updated_at', 'desc')->paginate(10);
-        return view('admin.typefile.index', compact('typefile', 'path'));
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('admin.typefile.index', 
+            compact('typefile','categories','typefiles','formats','licenses'));
     }
 
     public function store(Request $request)
@@ -50,7 +57,12 @@ class TypefileController extends Controller
     {
         $typefile = TypefileModel::orderBy('updated_at', 'desc')->paginate(10);
         $typefile_edit = TypefileModel::find($id);
-        return view('admin.typefile.edit', compact('typefile', 'typefile_edit'));
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('admin.typefile.edit', 
+            compact('typefile', 'typefile_edit','categories','typefiles','formats','licenses'));
     }
 
     public function update(Request $request, $id)
@@ -104,9 +116,14 @@ class TypefileController extends Controller
 
     public function search_datatable(Request $request)
     {
-        $typefile = TypefileModel::orderBy('updated_at', 'desc')->paginate(10);
+        $data = TypefileModel::orderBy('updated_at', 'desc')->paginate(10);
         $search = $request->get('search');
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         $typefile = DB::table('typefile')->where('name', 'like', '%' . $search . '%')->paginate(10);
-        return view('admin.typefile.search', compact('typefile', 'search'));
+        return view('admin.typefile.search', 
+            compact('data','search','categories','typefiles','formats','licenses'));
     }
 }

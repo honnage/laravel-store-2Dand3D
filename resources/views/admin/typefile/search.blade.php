@@ -103,7 +103,7 @@
                         </label>
                     </div>
                     <div class="card-body">
-                        @if($typefile->count()>0)
+                        @if($data->count()>0)
                             <table class="table table-responsive ">
                                 <thead >
                                     <tr>
@@ -111,18 +111,19 @@
                                         <th>นามสกุลไฟล์</th>
                                         <th>รูปแบบ</th>
                                         <th>คำอธิบาย</th>
+                                        <th>จำนวน</th>
                                         <th><center>แก้ไข</center></th>
                                         <th><center>ลบ</center></th>
                                     </tr>
                                 </thead>
-                                @foreach($typefile as $row)
+                                @foreach($data as $row)
                                 <tbody>
                                     <tr>
-                                        <td><b>{{ $typefile->firstItem()+$loop->index}}</b></td>
+                                        <td><b>{{ $data->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-2">{{ $row->name}}</td>
                                         <td class="col-sm-2">{{ $row->formats}}</td>
                                         <td class="col-sm-8">{{ $row->description}}</td>
-
+                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
                                         <td>
                                             <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/typefile/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>
@@ -137,7 +138,7 @@
                                 @endforeach
                             </table>
                             <div class="pagination-block">
-                                {{  $typefile->appends(request()->input())->links('layouts.paginationlinks') }}
+                                {{  $data->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else
                             <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลค้นหาที่ใกล้เคียง --</h3>

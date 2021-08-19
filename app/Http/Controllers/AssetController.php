@@ -12,29 +12,35 @@ use App\Models\LicenseModel;
 
 class AssetController extends Controller
 {
-    public function index(){
-        $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(16);  
-        return view('asset.index', compact('asset'));
-    }
-
     public function dashboard_admin(){
         $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(10);  
-        return view('admin.asset.dashboard', compact('asset'));
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('admin.asset.dashboard',
+            compact('asset','categories','typefiles','formats','licenses'));
     }
-
 
     public function dashboard_user($id){
-        $asset = AssetModel::all();
-        return view('asset.index', compact('asset'));
+        // $asset = AssetModel::all();
+        $typefile_edit = AssetModel::find($id);
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('asset.dashboard', 
+            compact('asset','categories','typefiles','formats','licenses'));
     }
-
 
     public function upload(){
         $user = Auth::user();
         $categories = CategoryModel::all();
         $typefiles = TypefileModel::all();
         $licenses = LicenseModel::all();
-        return view('asset.upload', compact('user', 'categories', 'typefiles', 'licenses'));
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('asset.upload', 
+            compact('user', 'categories', 'typefiles', 'licenses'));
     }
 
     public function store(Request $request){
@@ -112,7 +118,6 @@ class AssetController extends Controller
         $request->file('image')->move(public_path($image_location), $image_path.".".$image_ext);
         $request->file('asset')->move(public_path($asset_location), $asset_path.".".$asset_ext);
         $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
-        
         return redirect('/');
     }
 
@@ -122,6 +127,7 @@ class AssetController extends Controller
         $typefiles = TypefileModel::all();
         $licenses = LicenseModel::all();
         $asset = AssetModel::all();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         return view('asset.upload', compact('user', 'categories', 'typefiles', 'licenses'));
     }
 }

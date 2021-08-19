@@ -9,17 +9,15 @@ use App\Models\AssetModel;
 use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
-use App\Models\User;
 
-class UsersController extends Controller
+class WelcomeController extends Controller
 {
-    public function index()
-    {       
-        $users = User::orderBy('updated_at', 'desc')->paginate(10);
+    public function index(){
+        $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(16);  
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
         $licenses = LicenseModel::get();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
-        return view('admin.users.index', compact('users','categories','typefiles','formats','licenses'));
+        return view('welcome', compact('asset','categories','typefiles','licenses','formats'));
     }
 }

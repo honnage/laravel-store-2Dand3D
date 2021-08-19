@@ -103,6 +103,7 @@
                                         <th>ลำดับ</th>
                                         <th>หมวดหมู่ สำหรับภาษาไทย</th>
                                         <th>หมวดหมู่ สำหรับภาษาอังกฤษ</th>
+                                        <th>จำนวน</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -113,6 +114,8 @@
                                         <td><b>{{ $category->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-6">{{ $row->name_th}}</td>
                                         <td class="col-sm-6">{{ $row->name_en}}</td>
+                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
+
                                     </tr>
                                 </tbody>
                                 @endforeach

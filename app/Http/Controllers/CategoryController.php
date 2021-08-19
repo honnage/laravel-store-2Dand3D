@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AssetModel;
 use App\Models\CategoryModel;
+use App\Models\TypefileModel;
+use App\Models\LicenseModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -12,7 +15,12 @@ class CategoryController extends Controller
     public function index()
     {
         $category = CategoryModel::orderBy('updated_at', 'desc')->paginate(10);
-        return view('admin.category.index', compact('category'));
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('admin.category.index', 
+            compact('category','categories','typefiles','formats','licenses'));
     }
 
     public function store(Request $request)
@@ -45,8 +53,13 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = CategoryModel::orderBy('updated_at', 'desc')->paginate(10);
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
         $category_edit = CategoryModel::find($id);
-        return view('admin.category.edit', compact('category', 'category_edit'));
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('admin.category.edit', 
+            compact('category', 'category_edit','categories','typefiles','formats','licenses'));
     }
 
     public function update(Request $request, $id)
@@ -97,7 +110,11 @@ class CategoryController extends Controller
     public function search_datatable(Request $request)
     {
         $search = $request->get('search');
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
         $query = CategoryModel::query();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         $columns = ['name_th', 'name_en'];
 
         foreach ($columns as $column) {
@@ -105,6 +122,7 @@ class CategoryController extends Controller
         }
 
         $category = $query->paginate(10);
-        return view('admin.category.search', compact('category', 'search'));
+        return view('admin.category.search', 
+            compact('category', 'search','categories','typefiles','formats','licenses'));
     }
 }

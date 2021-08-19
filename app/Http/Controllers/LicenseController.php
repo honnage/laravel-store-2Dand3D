@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LicenseModel;
+use App\Models\AssetModel;
+use App\Models\CategoryModel;
+use App\Models\TypefileModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -12,7 +15,12 @@ class LicenseController extends Controller
     public function index()
     {
         $license = LicenseModel::orderBy('updated_at', 'desc')->paginate(10);
-        return view('admin.license.index', compact('license'));
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('admin.license.index', 
+            compact('license','categories','typefiles','formats','licenses'));
     }
 
     public function store(Request $request)
@@ -45,8 +53,13 @@ class LicenseController extends Controller
     public function edit($id)
     {
         $license = LicenseModel::orderBy('updated_at', 'desc')->paginate(10);
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
         $license_edit = LicenseModel::find($id);
-        return view('admin.license.edit', compact('license', 'license_edit'));
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('admin.license.edit', 
+            compact('license', 'license_edit','categories','typefiles','formats','licenses'));
     }
 
     public function update(Request $request, $id)
@@ -97,7 +110,11 @@ class LicenseController extends Controller
     public function search_datatable(Request $request)
     {
         $search = $request->get('search');
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
         $query = LicenseModel::query();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         $columns = ['name_th', 'name_en'];
 
         foreach($columns as $column){
@@ -105,6 +122,7 @@ class LicenseController extends Controller
         }
 
         $license = $query->paginate(10);
-        return view('admin.license.search', compact('license', 'search'));
+        return view('admin.license.search', 
+            compact('license', 'search','categories','typefiles','formats','licenses'));
     }
 }

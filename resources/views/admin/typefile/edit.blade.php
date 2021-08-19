@@ -117,6 +117,7 @@
                                         <th>นามสกุลไฟล์</th>
                                         <th>รูปแบบ</th>
                                         <th>คำอธิบาย</th>
+                                        <th>จำนวน</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -128,6 +129,7 @@
                                         <td class="col-sm-2">{{ $row->name}}</td>
                                         <td class="col-sm-2">{{ $row->formats}}</td>
                                         <td class="col-sm-8">{{ $row->description}}</td>
+                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
                                     </tr>
                                 </tbody>
                                 @endforeach

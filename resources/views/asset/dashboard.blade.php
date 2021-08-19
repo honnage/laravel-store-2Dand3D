@@ -72,7 +72,7 @@
                                 @foreach($asset as $row)
                                 <tbody>
                                     <tr>
-                                        <td><b>{{ $asset->firstItem()+$loop->index}}</b></td>
+                                        {{-- <td><b>{{ $asset->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-1"><img src="{{url($row->image)}}"  width="200px" height="150px"></td> 
                                         <td class="col-sm-1"><model-viewer src="{{url($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
                                         <td class="col-sm-2">{{ $row->user->firstname}} {{ $row->user->lastname}}</td> 
@@ -82,7 +82,7 @@
                                         <td class="col-sm-1" style="text-align:right;">{{ number_format( $row->price )}}</td>
                                         <td class="col-sm-2">
                                             <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/license/edit/'.$row->id)}}"><i class="far fa-edit"></i></a></center>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 </tbody>
                                 @endforeach
