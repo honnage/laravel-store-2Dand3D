@@ -72,6 +72,7 @@ class AssetController extends Controller
                 'asset.mimes' => "นามสกุลต้องเป็น jpg jpeg png zip rar",
             ]
         );
+
         // upload image
         $image = $request->file('image'); //เข้ารหัสรูปภาพ ฐาน10
         $image_ext = strtolower($image->getClientOriginalExtension()); 
@@ -100,6 +101,11 @@ class AssetController extends Controller
         $asset->asset_size  =  $asset_size;
         $asset->asset_type  =  $asset_ext;
         $asset->asset_path = $asset_path.".".$asset_ext;
+
+        $id = $request->typefile_id;
+        $typefiles_data = TypefileModel::find($id);
+        $asset->formats = $typefiles_data->formats;
+        // dd($asset->formats);
 
          //upload show model 
          if($request->model != null){
@@ -141,21 +147,29 @@ class AssetController extends Controller
         $data['updated_at'] = now();
 
         if($request->category_id){
-            $data['category_id']=$request->category_id;
+            $data['category_id'] = $request->category_id;
         }
 
         if($request->typefile_id){
-            $data['typefile_id']=$request->typefile_id;
+            $typefile_id = $request->typefile_id;
+            $typefiles_data = TypefileModel::find($typefile_id);
+            $formats = $typefiles_data->formats;
+            // dd( $formats);
+
+            $data['formats'] = $formats;
+            //    dd( $formats);
+            $data['typefile_id'] = $request->typefile_id;
         }
 
         if($request->license_id){
-            $data['license_id']=$request->license_id;
+            $data['license_id'] = $request->license_id;
         }
 
         if($request->status_show){
-            $data['status_show']=$request->status_show;
+            $data['status_show'] = $request->status_show;
         }
 
+       
        
         AssetModel::find($id)->update($data);
 

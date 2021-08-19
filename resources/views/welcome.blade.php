@@ -21,7 +21,7 @@
                                                 </div>
                                             @else
                                                 <div class="productinfo text-center" style="background: #17C2A6; border-radius: 5px;">
-                                                    <model-viewer src="{{ $row->model_path }}" alt="model robot" auto-rotate camera-controls ar  width="400px" height="300px"></model-viewer>
+                                                    <model-viewer src="{{url($row->model_path) }}" alt="model robot" auto-rotate camera-controls ar  width="400px" height="300px"></model-viewer>
                                                 </div>
                                             @endif
 

@@ -33,5 +33,26 @@ class WelcomeController extends Controller
         return view('welcome', compact('asset','categories','typefiles','licenses','formats'));
     }
 
+    public function search_category(Request $request, $id){
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        $asset = AssetModel::where('category_id', $id)->orderBy('updated_at', 'desc')->paginate(16);
+        return view('welcome', 
+            compact('asset','categories','typefiles','formats','licenses'));
+    }
+
+    public function search_formats(Request $request, $id){
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        $asset = AssetModel::where('formats', $id)->orderBy('updated_at', 'desc')->paginate(16);
+        return view('welcome', 
+            compact('asset','categories','typefiles','formats','licenses'));
+    }
+
+
 
 }
