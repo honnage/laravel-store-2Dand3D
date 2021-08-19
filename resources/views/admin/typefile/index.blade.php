@@ -22,7 +22,13 @@
                 <div class="alert alert-success" role="alert">
                     {{Session()->get('success')}}
                 </div>
+            @endif 
+            @if(Session()->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{Session()->get('error')}}
+                </div>
             @endif
+            
             <div class="container-fluid px-4">
                 <div class="col-xl-12 my-2">
                     <div class="d-flex justify-content-between">

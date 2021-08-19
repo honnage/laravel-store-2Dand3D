@@ -143,9 +143,9 @@
                                     </div>
 
                                     <div class="d-flex flex-row-reverse bd-highlight">
-                                        <button type="submit" name="submit" class="btn btn-success col-sm-2">เพิ่มข้อมูล</button>
+                                        <button type="submit" name="submit" class="btn btn-success col-sm-2" width="100%">เพิ่มข้อมูล</button>
                                         &nbsp;&nbsp;
-                                        <button class="btn btn-secondary col-sm-1" type="reset">ยกเลิก</button>
+                                        <button class="btn btn-secondary" type="reset" width="100%">ยกเลิก</button>
                                     </div>
                                     
                                 </form>

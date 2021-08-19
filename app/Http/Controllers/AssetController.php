@@ -23,14 +23,14 @@ class AssetController extends Controller
     }
 
     public function dashboard_user($id){
-        // $asset = AssetModel::all();
-        $typefile_edit = AssetModel::find($id);
+        $data = $id;
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
         $licenses = LicenseModel::get();
+        $asset = AssetModel::where('user_id',$id)->paginate(10);  
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         return view('asset.dashboard', 
-            compact('asset','categories','typefiles','formats','licenses'));
+            compact('asset','categories','typefiles','formats','licenses','data'));
     }
 
     public function upload(){
@@ -40,7 +40,7 @@ class AssetController extends Controller
         $licenses = LicenseModel::all();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         return view('asset.upload', 
-            compact('user', 'categories', 'typefiles', 'licenses'));
+            compact('user','categories','typefiles','formats','licenses'));
     }
 
     public function store(Request $request){
@@ -75,14 +75,14 @@ class AssetController extends Controller
         $image = $request->file('image'); //เข้ารหัสรูปภาพ ฐาน10
         $image_ext = strtolower($image->getClientOriginalExtension()); 
         $image_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อภาพ
-        $image_location = "images/";
+        $image_location = "upload/images/";
         $image_path = $image_location.$image_gen;
 
         // upload asset
         $asset = $request->file('asset'); 
         $asset_ext = strtolower($asset->getClientOriginalExtension()); // ดึงนามสกุลไฟล์ภาพ
         $asset_gen = hexdec(uniqid()); //Generate ชื่อภาพ
-        $asset_location = "assets/";
+        $asset_location = "upload/assets/";
         $asset_path  = $asset_location."u".Auth::user()->id."_".$asset_gen;
         $asset_size = $asset->getSize();
   
@@ -104,20 +104,22 @@ class AssetController extends Controller
          if($request->model != null){
             $model = $request->file('model');
             $model_ext = strtolower($model->getClientOriginalExtension()); //ดึงนามสกุลไฟล์ภาพ
-            $model_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อ
-            $model_location = "models/";
-            $model_path  = $model_location.$model_gen; 
-      
-            $model_size = $model->getSize();
-            $asset->model_size = $model_size;
-            $asset->model_type = $model_ext;
-            $asset->model_path = $model_path.".".$model_ext;
+
+            if( $model_ext == "gltf" || $model_ext == "glb"){
+                $model_gen = "u".Auth::user()->id."_".hexdec(uniqid()); //Generate ชื่อ
+                $model_location = "upload/models/";
+                $model_path  = $model_location.$model_gen; 
+          
+                $model_size = $model->getSize();
+                $asset->model_size = $model_size;
+                $asset->model_type = $model_ext;
+                $asset->model_path = $model_path.".".$model_ext;
+                $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
+            }
         }
-        // dd($asset);
         $asset->save();
         $request->file('image')->move(public_path($image_location), $image_path.".".$image_ext);
         $request->file('asset')->move(public_path($asset_location), $asset_path.".".$asset_ext);
-        $request->file('model')->move(public_path($model_location), $model_path.".".$model_ext);
         return redirect('/');
     }
 
@@ -128,6 +130,6 @@ class AssetController extends Controller
         $licenses = LicenseModel::all();
         $asset = AssetModel::all();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
-        return view('asset.upload', compact('user', 'categories', 'typefiles', 'licenses'));
+        return view('asset.upload', compact('user','categories','typefiles','formats','licenses'));
     }
 }

@@ -12,7 +12,10 @@ use App\Http\Controllers\AssetController;
 
 Auth::routes();
 Route::get('/',[WelcomeController::class,'index']);
+Route::get('search',[WelcomeController::class,'search']);
 Route::get('/home', [WelcomeController::class,'index'])->name('home');
+
+
 Route::get('asset',[AssetController::class,'index']);
 
 // must login before

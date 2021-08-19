@@ -12,12 +12,26 @@ use App\Models\LicenseModel;
 
 class WelcomeController extends Controller
 {
-    public function index(){
-        $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(16);  
+    public function index(Request $request){
+        $query = AssetModel::query();
+        $search = $request->get('search');
+        if($search){
+            $columns = ['display_name'];
+            foreach ($columns as $column) {
+                $query->orWhere($column, 'LIKE', '%' . $search . '%');
+            }
+            $asset = $query->paginate(16);
+        }else{
+            $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(16);  
+        }
+    
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
         $licenses = LicenseModel::get();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+
         return view('welcome', compact('asset','categories','typefiles','licenses','formats'));
     }
+
+
 }

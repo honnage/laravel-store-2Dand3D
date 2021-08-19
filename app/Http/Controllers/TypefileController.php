@@ -104,11 +104,11 @@ class TypefileController extends Controller
 
     public function destroy($id)
     {
-        // $category = Category::find($id);
-        // if($category->posts->count() > 0){
-        //     Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีชื่อบทความใช้งานอยู่');
-        //     return redirect()->back();
-        // }
+        $typefile = TypefileModel::find($id);
+        if($typefile->asset->count() > 0){
+            Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีชื่อชิ้นงานใช้งานอยู่');
+            return redirect()->back();
+        }
         TypefileModel::find($id)->delete();
         Session()->flash('success', 'ลบข้อมูลเรียบร้อย');
         return redirect('/typefile');

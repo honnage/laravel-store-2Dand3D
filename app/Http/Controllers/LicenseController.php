@@ -89,7 +89,6 @@ class LicenseController extends Controller
                 'name_en' =>  $license->name_en,
                 'updated_at' => now(),
             ]);
-
         // dd($request->all());
         Session()->flash('success', 'อัพเดทข้อมูลเรียบร้อยแล้ว');
         return redirect('/license');
@@ -97,11 +96,11 @@ class LicenseController extends Controller
 
     public function destroy($id)
     {
-        // $category = Category::find($id);
-        // if($category->posts->count() > 0){
-        //     Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีชื่อบทความใช้งานอยู่');
-        //     return redirect()->back();
-        // }
+        $license = LicenseModel::find($id);
+        if($license->asset->count() > 0){
+            Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีชื่อชิ้นงานใช้งานอยู่');
+            return redirect()->back();
+        }
         LicenseModel::find($id)->delete();
         Session()->flash('success', 'ลบข้อมูลเรียบร้อย');
         return redirect('/license');

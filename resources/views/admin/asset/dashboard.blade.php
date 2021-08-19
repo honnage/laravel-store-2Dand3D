@@ -65,7 +65,9 @@
                                         <th><center>ชื่อชิ้นงาน</center></th>
                                         <th><center>หมวดหมู่</center></th>
                                         <th><center>นามสกุลไฟล์</center></th>
+                                        <th><center>รูปแบบ</center></th>
                                         <th><center>ราคา</center></th>
+                                        <th><center>แสดงชิ้นงาน</center></th>
                                         <th><center>รายละเอียด</center></th>
                                     </tr>
                                 </thead>
@@ -74,12 +76,28 @@
                                     <tr>
                                         <td><b>{{ $asset->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-1"><img src="{{url($row->image)}}"  width="200px" height="150px"></td> 
-                                        <td class="col-sm-1"><model-viewer src="{{url($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
-                                        <td class="col-sm-2">{{ $row->user->firstname}} {{ $row->user->lastname}}</td> 
-                                        <td class="col-sm-4">{{ $row->display_name}}</td> 
-                                        <td class="col-sm-2"><center>{{ $row->category->name_th}}<center></td> 
-                                        <td class="col-sm-2"><center>{{ $row->typefile->name}} / {{ $row->typefile->formats}}</center></td> 
+                                    
+                                        @if ($row->model_path == null)
+                                            <td class="col-sm-1" style="background: #a0a0a0"></td> 
+                                        @else
+                                            <td class="col-sm-1"><model-viewer src="{{url($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
+                                        @endif
+                                        
+                                        <td class="col-sm-2"><b>{{ $row->user->firstname}} {{ $row->user->lastname}}</b></td> 
+                                        <td class="col-sm-2">{{ $row->display_name}}</td> 
+                                        <td class="col-sm-1"><center>{{ $row->category->name_th}}<center></td> 
+                                        <td class="col-sm-1"><center>{{ $row->typefile->name}}</center></td> 
+                                        <td class="col-sm-2"><center>{{ $row->typefile->formats}}</center></td> 
                                         <td class="col-sm-1" style="text-align:right;">{{ number_format( $row->price )}}</td>
+                                        
+                                        @if($row->status_show == 0)
+                                            <td class="col-sm-2"><center>รูปภาพ</center></td> 
+                                        @elseif ($row->status_show == 1)   
+                                            <td class="col-sm-2"><center>โมเดล</center></td>
+                                        @else
+                                            <td></td>
+                                        @endif
+                                        
                                         <td class="col-sm-2">
                                             <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/license/edit/'.$row->id)}}"><i class="far fa-edit"></i></a></center>
                                         </td>

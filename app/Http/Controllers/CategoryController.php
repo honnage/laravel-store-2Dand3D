@@ -97,11 +97,11 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        // $category = Category::find($id);
-        // if($category->posts->count() > 0){
-        //     Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีชื่อบทความใช้งานอยู่');
-        //     return redirect()->back();
-        // }
+        $category = CategoryModel::find($id);
+        if($category->asset->count() > 0){
+            Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีชื่อชิ้นงานใช้งานอยู่');
+            return redirect()->back();
+        }
         CategoryModel::find($id)->delete();
         Session()->flash('success', 'ลบข้อมูลเรียบร้อย');
         return redirect('/category');
@@ -109,14 +109,14 @@ class CategoryController extends Controller
 
     public function search_datatable(Request $request)
     {
-        $search = $request->get('search');
+       
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
         $licenses = LicenseModel::get();
-        $query = CategoryModel::query();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        $query = CategoryModel::query();
+        $search = $request->get('search');
         $columns = ['name_th', 'name_en'];
-
         foreach ($columns as $column) {
             $query->orWhere($column, 'LIKE', '%' . $search . '%');
         }

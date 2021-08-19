@@ -58,7 +58,7 @@
                                         <th>ลำดับ</th>
                                         <th>ชื่อจริง - นามสกุล</th>
                                         <th>อีเมล</th>
-                                        <th>จำนวนผลงาน</th>
+                                        <th><center>ผลงาน</center></th>
                                         <th>สถานะ</th>
                                         <th><center>แก้ไขสิทธิ์</center></th>
                                         <th><center>รายละเอียด</center></th>
@@ -70,19 +70,21 @@
                                         <td><b>{{ $users->firstItem()+$loop->index}}</b></td>
                                         <td class="col-sm-4">{{ $row->firstname}} {{ $row->lastname}}</td>
                                         <td class="col-sm-4">{{ $row->email}}</td>
-                                        <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
+                                        <td class="col-sm-2"><center>{{ number_format( $row->asset->count() )}}<center></td>
                                         <td class="col-sm-2">
                                             @if($row->isStatus == 10 || $row->id == 1)
                                                 ผู้ดูแลระบบ
+                                            @elseif($row->isStatus == 5)
+                                                เจ้าหน้าที่
                                             @else
-                                                {{ $row->isStatus}}
+                                                ผู้ใช้งาน
                                             @endif
                                         </td>
                                         <td>
                                             <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/users/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/users/edit/'.$row->id)}}"><i class="fas fa-eye"></i></a>
+                                            <a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/asset/dashboard/'.$row->id)}}"><i class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>

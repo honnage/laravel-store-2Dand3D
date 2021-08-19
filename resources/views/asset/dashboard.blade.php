@@ -61,28 +61,59 @@
                                         <th>ลำดับ</th>
                                         <th><center>รูปภาพ</center></th>
                                         <th><center>โมเดล</center></th>
-                                        <th><center>ผู้เผยแพร่</center></th>
-                                        <th><center>ชื่อชิ้นงาน</center></th>
+                                        <th>ชื่อชิ้นงาน</th>
                                         <th><center>หมวดหมู่</center></th>
                                         <th><center>นามสกุลไฟล์</center></th>
+                                        <th><center>รูปแบบ</center></th>
                                         <th><center>ราคา</center></th>
-                                        <th><center>รายละเอียด</center></th>
+                                        <th><center>แสดงชิ้นงาน</center></th>
+
+                                        @if(Auth::user()->id == $data)
+                                            <th><center>แก้ไข</center></th>
+                                            <th><center>ลบ</center></th>
+                                        @endif
+
                                     </tr>
                                 </thead>
                                 @foreach($asset as $row)
                                 <tbody>
-                                    <tr>
-                                        {{-- <td><b>{{ $asset->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-1"><img src="{{url($row->image)}}"  width="200px" height="150px"></td> 
-                                        <td class="col-sm-1"><model-viewer src="{{url($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
-                                        <td class="col-sm-2">{{ $row->user->firstname}} {{ $row->user->lastname}}</td> 
-                                        <td class="col-sm-4">{{ $row->display_name}}</td> 
-                                        <td class="col-sm-2"><center>{{ $row->category->name_th}}<center></td> 
-                                        <td class="col-sm-2"><center>{{ $row->typefile->name}} / {{ $row->typefile->formats}}</center></td> 
-                                        <td class="col-sm-1" style="text-align:right;">{{ number_format( $row->price )}}</td>
+                                    <tr> 
+                                        <td><b>{{ $asset->firstItem()+$loop->index}}</b></td>
+                                        <td class="col-sm-1"><img src="{{url($row->image)}}"  width="200px" height="150px"></td>                                        
+                                       
+                                        @if ($row->model_path == null)
+                                            <td class="col-sm-1" style="background: #a0a0a0"></td> 
+                                        @else
+                                            <td class="col-sm-1"><model-viewer src="{{asset($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
+                                        @endif
+
+                                        <td class="col-sm-3">{{ $row->display_name}} {{Auth::user()->id}} </td> 
+                                        <td class="col-sm-1"><center>{{ $row->category->name_th}}<center></td>  
+                                        <td class="col-sm-1"><center>{{ $row->typefile->name}}</center></td> 
+                                        <td class="col-sm-2"><center>{{ $row->typefile->formats}}</center></td> 
+                                        <td style="text-align:right;">{{ number_format( $row->price )}}</td>
                                         <td class="col-sm-2">
-                                            <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/license/edit/'.$row->id)}}"><i class="far fa-edit"></i></a></center>
-                                        </td> --}}
+                                            @if($row->status_show == 0)
+                                                <center>รูปภาพ</center>
+                                            @elseif ($row->status_show == 1)
+                                                <center>โมเดล</center>
+                                            @endif
+                                        </td> 
+
+                                        @if(Auth::user()->id == $row->user_id)
+                                            <td>
+                                                <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url(''.$row->id)}}"><i class="far fa-edit"></i></a></center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                <form class="delete_form" action="{{url(''.$row->id)}}" method="post">
+                                                    {{csrf_field()}}
+                                                    <a style="color:white; width: 50px" data-name="{{$row->name}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                                </center>
+                                            </td>
+                                        @endif
+
                                     </tr>
                                 </tbody>
                                 @endforeach

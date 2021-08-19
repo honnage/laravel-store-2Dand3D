@@ -82,10 +82,10 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="{{url('/')}}" method="get">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    <input class="form-control" type="text" type="search" name="search" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch"  />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
                 </div>
                 
             </form>
@@ -108,11 +108,6 @@
                             <a class="nav-link btn btn-success" href="{{ route('login') }}">{{ __('เข้าสู่ระบบ') }}</a>
                         </li>
                     @endif
-                    {{-- @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif --}}
                 @else
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
@@ -170,7 +165,7 @@
                                 @endif     
                             @endif
 
-                            
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#typefile" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-cube"></i> </div>
                                     รูปแบบ
@@ -178,9 +173,8 @@
                             </a>
                             <div class="collapse" id="typefile" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    @foreach( $formats as $format ) 
-                                        <a class="nav-link"  href=" "> {{ $format->formats }}</a>
-                                    @endforeach
+                                    <a class="nav-link"  href=" ">3D</a>
+                                    <a class="nav-link"  href=" ">2D</a>
                                 </nav>
                             </div> 
 
@@ -193,7 +187,9 @@
                             <div class="collapse" id="category" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     @foreach( $categories as $category ) 
-                                        <a class="nav-link"  href=" ">{{ $category->name_th }}</a>
+                                        @if($category->asset->count() >= 1 )
+                                            <a class="nav-link"  href=" ">{{ $category->name_th }}</a>
+                                        @endif
                                     @endforeach
                                 </nav>
                             </div>
@@ -207,7 +203,9 @@
                             <div class="collapse" id="format" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     @foreach( $typefiles as $typefile ) 
-                                        <a class="nav-link"  href=" "> {{ $typefile->name }}</a>
+                                        @if($typefile->asset->count() >= 1 )
+                                            <a class="nav-link"  href=" "> {{ $typefile->name }}</a>
+                                        @endif
                                     @endforeach
                                 </nav>
                             </div>
