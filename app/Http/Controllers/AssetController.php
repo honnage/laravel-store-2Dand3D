@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Models\AssetModel;
 use App\Models\CategoryModel;
 use App\Models\TypefileModel;
@@ -125,11 +126,57 @@ class AssetController extends Controller
 
     public function edit($id){
         $user = Auth::user();
+        $asset = AssetModel::find($id);
         $categories = CategoryModel::all();
         $typefiles = TypefileModel::all();
         $licenses = LicenseModel::all();
-        $asset = AssetModel::all();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
-        return view('asset.upload', compact('user','categories','typefiles','formats','licenses'));
+        return view('asset.upload', compact('user','categories','typefiles','formats','licenses','asset'));
+    }
+
+    public function update(Request $request, $id){
+        // $asset_data = AssetModel::find($id);
+        // dd($asset_data->all());
+        $data = $request->only(['display_name','description','price']);
+        $data['updated_at'] = now();
+
+        if($request->category_id){
+            $data['category_id']=$request->category_id;
+        }
+
+        if($request->typefile_id){
+            $data['typefile_id']=$request->typefile_id;
+        }
+
+        if($request->license_id){
+            $data['license_id']=$request->license_id;
+        }
+
+        if($request->status_show){
+            $data['status_show']=$request->status_show;
+        }
+
+       
+        AssetModel::find($id)->update($data);
+
+      
+
+        
+        Session()->flash('success', 'อัพเดทข้อมูลเรียบร้อยแล้ว');
+        return redirect('/');
+    }
+
+    public function destroy($id)
+    {
+        $asset = AssetModel::find($id);
+        AssetModel::find($id)->delete();
+        // $post->tags()->detach($post->post_id);
+
+        // Storage::delete($asset->image);
+        File::delete(public_path($asset->image));
+        File::delete(public_path($asset->asset_path));
+        File::delete(public_path($asset->model_path));
+        Session()->flash('success','ลบข้อมูลเรียบร้อยแล้ว');
+        return redirect('/');
     }
 }

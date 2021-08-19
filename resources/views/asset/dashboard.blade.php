@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('content')
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" style="background: #f8f8f8">
         <main>
             @if($errors->any())
                 <div class="alert alert-danger">
@@ -27,7 +27,7 @@
                 <div class="col-xl-12 my-2">
                     <div class="d-flex justify-content-between">
                         <div class=" flex-row-reverse  ">
-                            <h1 class="text-left">ชิ้นงานในระบบ</h1>
+                            <h1 class="text-left">ชิ้นงานของฉัน</h1>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                  
                         <label class="my-2">
                             <i class="fas fa-table me-1"></i>
-                            <span>ตารางข้อมูล ชิ้นงานในระบบ</span> 
+                            <span>ตารางข้อมูล ชิ้นงานของฉัน</span> 
                         </label>
 
                         <label style="float:right;text-align:right;" class="my-2">
@@ -87,12 +87,13 @@
                                             <td class="col-sm-1"><model-viewer src="{{asset($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
                                         @endif
 
-                                        <td class="col-sm-3">{{ $row->display_name}} {{Auth::user()->id}} </td> 
+                                        <td class="col-sm-3">{{ $row->display_name}}</td> 
                                         <td class="col-sm-1"><center>{{ $row->category->name_th}}<center></td>  
                                         <td class="col-sm-1"><center>{{ $row->typefile->name}}</center></td> 
                                         <td class="col-sm-2"><center>{{ $row->typefile->formats}}</center></td> 
                                         <td style="text-align:right;">{{ number_format( $row->price )}}</td>
                                         <td class="col-sm-2">
+
                                             @if($row->status_show == 0)
                                                 <center>รูปภาพ</center>
                                             @elseif ($row->status_show == 1)
@@ -102,13 +103,13 @@
 
                                         @if(Auth::user()->id == $row->user_id)
                                             <td>
-                                                <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url(''.$row->id)}}"><i class="far fa-edit"></i></a></center>
+                                                <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/asset/edit/'.$row->id)}}"><i class="far fa-edit"></i></a></center>
                                             </td>
                                             <td>
                                                 <center>
-                                                <form class="delete_form" action="{{url(''.$row->id)}}" method="post">
+                                                <form class="delete_form" action="{{url('/asset/destroy/'.$row->id)}}" method="post">
                                                     {{csrf_field()}}
-                                                    <a style="color:white; width: 50px" data-name="{{$row->name}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
+                                                    <a style="color:white; width: 50px" data-name="{{$row->display_name}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
                                                 </form>
                                                 </center>
                                             </td>

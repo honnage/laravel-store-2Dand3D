@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('content')
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" style="background: #f8f8f8">
         <main>
             @if($errors->any())
                 <div class="alert alert-danger">

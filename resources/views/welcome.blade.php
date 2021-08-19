@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('content')
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" style="background: #f8f8f8">
         <main>
             <section >
                 <div class="container-fluid px-4">
@@ -11,10 +11,11 @@
                                 @if($row->status_show == "0" || $row->status_show == "1")
 
                                 <div class="col-lg-3 col-md-2 my-4" data-aos="fade-up"  >
-                                    <div class="card" style="border-radius: 25px; background: #fafafa">
+                                    <div class="card" style="border-radius: 25px; background: #fffcfc">
                                         <div class="box">
                                             
-                                            @if($row->model_path == null)
+                                            @if($row->status_show == "0")
+                                            {{-- @if($row->model_path == null) --}}
                                                 <div >
                                                     <img src="{{url($row->image)}}"  width="100%" height="150px">
                                                 </div>
@@ -26,19 +27,19 @@
 
                                             <div class="card-body">
                                                 <strong style="font-size: 20px">{{ $row->display_name }}</strong><br>
-                                                <div class="d-flex justify-content-between">
+                                                <div class="d-flex justify-content-between my-2">
                                                     <div class=" flex-row-reverse">
-                                                        <a type="button" class="btn btn-outline-info">{{ $row->typefile->name }}</a>
+                                                        <a type="button" class="btn btn-outline-info">{{ $row->typefile->name }}</a>                                                        
+                                                        <a type="button" class="btn btn-outline-info">{{ $row->typefile->formats }}</a>
                                                     </div>
                                                     <div class="d-flex flex-row-reverse">
-                                                
                                                         <div class="flex-row-reverse">
                                                             <a type="button" class="btn btn-outline-info">{{ $row->category->name_th }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
-                                                <strong style="font-size:18px">
+                                                <div style="font-size:18px" class="my-2">
                                                     ราคา:<strong style="color:#17C2A6; font-size: 18px">
                                                         @if ($row->price == 0)
                                                             ฟรี
@@ -46,7 +47,7 @@
                                                             {{ number_format( $row->price )}}
                                                         @endif
                                                     </strong>
-                                                </strong>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

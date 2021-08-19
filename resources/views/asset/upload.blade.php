@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('content')
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" style="background: #f8f8f8">
         <main>
             @if($errors->any())
                 <div class="alert alert-danger">
@@ -23,29 +23,14 @@
                     {{Session()->get('success')}}
                 </div>
             @endif
-            <div class="container-fluid px-4">
+            <div class="container-fluid px-4 ">
           
                 <div class="row">
-                    <div class="col-xl-6 my-2">
-                        <div class="card mb-4" >
-                            <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                รายละเอียด
-                            </div>
-                            <div class="card-body" style="background: #17C2A6">
-                                <model-viewer src="{{ asset('models/u1_1708288495010546.glb') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
-                                {{-- <model-viewer src="{{ asset('models/nissan/scene.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
-                                 {{-- <model-viewer src="{{ asset('assets/Drossel.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
-                            </div>
-                        </div>
+                    <div class="col-xl-3 my-2">
                     </div>
 
                     <div class="col-xl-6 my-2">
                         <div class="card mb-4" >
-                            {{-- <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                รายละเอียด
-                            </div> --}}
                             <div class="card-body">
                                 @if (session('status'))
                                     <div class="alert alert-success" role="alert">
@@ -53,29 +38,36 @@
                                     </div>
                                 @endif
 
+
                                 <div class="d-flex justify-content-between">
                                     <div class=" flex-row-reverse  ">
-                                        <h1 class="text-left">อัพโหลดชิ้นงาน</h1>
+                                        <h1 class="text-left"> {{isset($asset)? "แก้ไขชิ้นงาน":"อัพโหลดชิ้นงาน"}}</h1>
                                     </div>
+                                    
                                 </div>
-                           
-                                <form action="{{url('/asset/store/')}}" method="post" enctype="multipart/form-data">
+                                @if (isset($asset) != null)
+                                    <div style="background: #17C2A6;" height="800px" class="my-4">
+                                        <model-viewer src="{{asset($asset->model_path)}}"  auto-rotate camera-controls ar width="auto"></model-viewer>
+                                    </div>
+                                @endif
+
+                                <form action="{{isset($asset)?"/asset/update/$asset->id" :url("/asset/store")}} " method="post" enctype="multipart/form-data">
 
                                     {{csrf_field()}}
                                     <div class="form-group my-2">
                                         <strong class="col-sm-12">ชื่อชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label"  name="display_name" id="display_name" placeholder="เช่น ชื่อชิ้นงานที่จะอัพโหลด ">
+                                        <input type="text" class="col-sm-12 col-form-label"  name="display_name" id="display_name" value="{{isset($asset)?"$asset->display_name":' '}}" >
                                     </div>
 
                                     <div class="form-group my-4">
                                         <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
-                                        <input id="x" value="{{isset($posts)?"$posts->content":''}}" type="hidden" name="description">
+                                        <input id="x" value="{{isset($asset)?"$asset->description":''}}" type="hidden" name="description">
                                         <trix-editor input="x"></trix-editor>
                                     </div>
 
                                     <div class="form-group my-4">
                                         <strong class="col-sm-12">ราคา :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label"  name="price" id="price" placeholder="เช่น ชื่อชิ้นงานที่จะอัพโหลด ">
+                                        <input type="text" class="col-sm-12 col-form-label"  name="price" id="price" value="{{isset($asset)?"$asset->price":' '}}" >
                                     </div>
 
                                     <div class="form-group my-4">
@@ -84,8 +76,8 @@
                                             <option value="" style="color:red;">--- กรุณาเลือกหมวดหมู่ --- </option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}"
-                                                    @if(isset($posts))
-                                                        @if($category->id == $posts->category_id)
+                                                    @if(isset($asset))
+                                                        @if($asset->category_id == $asset->category_id)
                                                             selected
                                                         @endif
                                                     @endif
@@ -100,8 +92,8 @@
                                             <option value="" style="color:red;">--- กรุณาเลือกหมวดหมู่ ---</option>    
                                             @foreach($typefiles as $typefile)
                                                 <option value="{{$typefile->id}}"
-                                                    @if(isset($posts))
-                                                        @if($posts->hasTag($typefile->id))
+                                                    @if(isset($asset))
+                                                        @if($asset->typefile_id == $typefile->id)
                                                             selected
                                                         @endif
                                                     @endif
@@ -117,8 +109,8 @@
                                             <option value="" style="color:red;">--- กรุณาเลือกประเภทเผยเเพร่ ---</option>    
                                             @foreach($licenses as $license)
                                                 <option value="{{$license->id}}"
-                                                    @if(isset($posts))
-                                                        @if($posts->hasTag($license->id))
+                                                    @if(isset($asset))
+                                                        @if($asset->license_id == $license->id)
                                                             selected
                                                         @endif
                                                     @endif
@@ -127,30 +119,59 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group my-4">
-                                        <strong class="col-sm-12">รูปภาพ :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="file" name="image" value="" class="form-control">
-                                    </div>
+                                    @if (isset($asset) != null )
+                                        <div class="form-group my-4">
+                                            <strong class="col-sm-12">แสดงชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
+                                            <select class="form-control" name="status_show">
+                                                @if($asset->model_path != null)
+                                                    @if($asset->status_show == 0)
+                                                        <option value="0" style="color:red;"> แสดงรูป</option>
+                                                    @else
+                                                        <option value="1"> แสดงโมเดล</option>
+                                                    @endif
 
-                                    <div class="form-group my-4">
-                                        <strong class="col-sm-12">ไฟล์ชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="file" name="asset" value="" class="form-control">
-                                    </div>
+                                                    @if($asset->status_show != 0)
+                                                        <option value="0" style="color:red;"> แสดงรูป</option>
+                                                    @else
+                                                        <option value="1"> แสดงโมเดล</option>
+                                                    @endif
+                                                @else
+                                                    <option value="0" style="color:red;"> 
+                                                        แสดงรูป
+                                                    </option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                    @endif
 
-                                    <div class="form-group my-4">
-                                        <strong class="col-sm-12">แสดงตัวอย่างโมเดลสำหรับไฟล์ gltf หรือ glb :</strong><br>
-                                        <input type="file" name="model" value="" class="form-control">
-                                    </div>
+                                    @if (isset($asset) == 0 )
+                                        <div class="form-group my-4">
+                                            <strong class="col-sm-12">รูปภาพ :<strong style="color:red;"> * </strong></strong><br>
+                                            <input type="file" name="image" value="" class="form-control">
+                                        </div>
+
+                                        <div class="form-group my-4">
+                                            <strong class="col-sm-12">ไฟล์ชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
+                                            <input type="file" name="asset" value="" class="form-control">
+                                        </div>
+
+                                        <div class="form-group my-4">
+                                            <strong class="col-sm-12">แสดงตัวอย่างโมเดลสำหรับไฟล์ gltf หรือ glb :</strong><br>
+                                            <input type="file" name="model" value="" class="form-control">
+                                        </div>
+                                    @endif
+                                    
 
                                     <div class="d-flex flex-row-reverse bd-highlight">
-                                        <button type="submit" name="submit" class="btn btn-success col-sm-2" width="100%">เพิ่มข้อมูล</button>
-                                        &nbsp;&nbsp;
-                                        <button class="btn btn-secondary" type="reset" width="100%">ยกเลิก</button>
+                                        <input type="submit" name="submit" value="{{isset($asset)? "อัพเดทข้อมูล":"เพิ่มข้อมูล"}}" class="btn btn-success col-sm-3" width="100%">
                                     </div>
                                     
                                 </form>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-xl-3 my-2">
                     </div>
                 </div>
            

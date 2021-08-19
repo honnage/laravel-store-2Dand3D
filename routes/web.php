@@ -8,7 +8,7 @@ use App\Http\Controllers\TypefileController;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AssetController;
-
+use App\Models\User;
 
 Auth::routes();
 Route::get('/',[WelcomeController::class,'index']);
@@ -22,12 +22,14 @@ Route::get('asset',[AssetController::class,'index']);
 Route::middleware(['auth'])->group(function(){
     Route::get('asset/upload',[AssetController::class,'upload']);                   // AssetController
     Route::post('asset/store',[AssetController::class,'store']);
+
     Route::get('asset/edit/{id}',[AssetController::class,'edit']);
     Route::post('asset/update/{id}',[AssetController::class, 'update']);
     Route::get('asset/show/{id}',[AssetController::class,'show']);
     Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
+    Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
+    
 });
-
 
 //admin path only
 Route::middleware(['auth','StatusIS'])->group(function(){

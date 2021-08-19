@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('content')
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" style="background: #f8f8f8">
         <main>
             @if($errors->any())
                 <div class="alert alert-danger">
@@ -34,8 +34,6 @@
                             </div>
                             <div class="card-body" style="background: #17C2A6">
                                 <model-viewer src="{{ asset('models/u1_1708288495010546.glb') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer>
-                                {{-- <model-viewer src="{{ asset('models/nissan/scene.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
-                                 {{-- <model-viewer src="{{ asset('assets/Drossel.gltf') }}" alt="model robot" auto-rotate camera-controls ar ios-src="assets/Drossel.gltf"></model-viewer> --}}
                             </div>
                         </div>
                     </div>
@@ -60,7 +58,7 @@
                                 </div>
                                 {{ $asset_data->id }}
                            
-                                {{-- <form action="{{url('/asset/store/')}}" method="post" enctype="multipart/form-data">
+                                <form action="{{url('/asset/store/')}}" method="post" enctype="multipart/form-data">
 
                                     {{csrf_field()}}
                                     <div class="form-group my-2">
@@ -149,7 +147,7 @@
                                         <button class="btn btn-secondary col-sm-1" type="reset">ยกเลิก</button>
                                     </div>
                                     
-                                </form> --}}
+                                </form>
                             </div>
                         </div>
                     </div>
