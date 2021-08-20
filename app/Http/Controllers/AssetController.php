@@ -37,6 +37,20 @@ class AssetController extends Controller
             compact('asset','categories','typefiles','formats','licenses','detail','data'));
     }
 
+    public function detail($id){
+        $data = $id;
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $detail = User::find($id);
+
+        $asset = AssetModel::find($id);
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        return view('asset.detail', 
+            compact('asset','categories','typefiles','formats','licenses','detail','data'));
+    }
+
+    
     public function upload(){
         $user = Auth::user();
         $categories = CategoryModel::all();

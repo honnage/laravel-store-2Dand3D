@@ -5,7 +5,7 @@
             <section >
                 <div class="container-fluid px-4">
                 {{-- <div class="container" data-aos="fade-up"> --}}
-                    <div class="row my-4">
+                    <div class="row my-2">
                         @if($asset->count()>0)
                             @foreach( $asset as $row) 
                                 @if($row->status_show == "0" || $row->status_show == "1")
@@ -26,10 +26,10 @@
                                             @endif
 
                                             <div class="card-body">
-                                                <strong style="font-size: 20px">{{ $row->display_name }}</strong><br>
+                                                <strong style="font-size: 20px"><a href="{{url('/asset/detail/'.$row->id)}}" class="dropdown-item"> {{ $row->display_name }}</a></strong>
                                                 <div class="d-flex justify-content-between my-2">
                                                     <div class=" flex-row-reverse">
-                                                        <a  href="{{url('/search/typefile/'.$row->typefile_id)}}" type="button" class="btn btn-outline-primary">{{ $row->typefile->name }}</a>                                                        
+                                                        <a href="{{url('/search/typefile/'.$row->typefile_id)}}" type="button" class="btn btn-outline-primary">{{ $row->typefile->name }}</a>                                                        
                                                         <a href="{{url('/search/formats/'.$row->formats)}}" type="button" class="btn btn-outline-primary">{{ $row->typefile->formats }}</a>
                                                     </div>
                                                     <div class="d-flex flex-row-reverse">
@@ -40,11 +40,11 @@
                                                 </div>
                                                 
                                                 <div style="font-size:18px" class="my-2">
-                                                    ราคา:<strong style="color:#0eaf94; font-size: 18px">
+                                                    ราคา:<strong style="color:#0eaf94; font-size: 18px">                             
                                                         @if ($row->price == 0)
                                                             ฟรี
                                                         @else
-                                                            {{ number_format( $row->price )}}
+                                                            {{ number_format( $row->price )}} บาท
                                                         @endif
                                                     </strong>
                                                 </div>

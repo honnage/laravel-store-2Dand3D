@@ -85,7 +85,7 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="{{url('/')}}" method="get">
                 <div class="input-group">
-                    <input class="form-control" type="text" type="search" name="search" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch"  />
+                    <input class="form-control" type="text" type="search" name="search" placeholder="ค้นหา ชิ้นงาน..." aria-label="Search for..." aria-describedby="btnNavbarSearch"  />
                     <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
                 </div>
                 
@@ -215,8 +215,9 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        {{-- <div class="small">Logged in as:</div> --}}
+                        Copyright &copy; BUU 
+                        Informatics 2021
                     </div>
                 </nav>
 

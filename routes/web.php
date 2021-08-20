@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('asset/update/{id}',[AssetController::class, 'update']);
     Route::get('asset/show/{id}',[AssetController::class,'show']);
     Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
+    Route::get('asset/detail/{id}',[AssetController::class,'detail']);
     Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
     Route::get('asset/search/{id}',[AssetController::class, 'user_search_datatable']);
 });

@@ -30,7 +30,7 @@
             @endif
             
             <div class="container-fluid px-4">
-                <div class="col-xl-12 my-2">
+                <div class="col-xl-12 my-4">
                     <div class="d-flex justify-content-between">
                         <div class=" flex-row-reverse  ">
                             <h1 class="text-left">ประเภทนามสกุลไฟล์</h1>

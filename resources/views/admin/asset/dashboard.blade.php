@@ -24,7 +24,7 @@
                 </div>
             @endif
             <div class="container-fluid px-4">
-                <div class="col-xl-12 my-2">
+                <div class="col-xl-12 my-4">
                     <div class="d-flex justify-content-between">
                         <div class=" flex-row-reverse  ">
                             <h1 class="text-left">ชิ้นงานในระบบ</h1>
@@ -75,7 +75,7 @@
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $asset->firstItem()+$loop->index}}</b></td>
-                                        <td class="col-sm-1"><img src="{{url($row->image)}}"  width="200px" height="150px"></td> 
+                                        <td class="col-sm-1"><a href="{{url('/asset/detail/'.$row->id)}}" class="dropdown-item"><img src="{{url($row->image)}}"  width="200px" height="150px"></a></td> 
                                     
                                         @if ($row->model_path == null)
                                             <td class="col-sm-1" style="background: #a0a0a0;"></td> 
@@ -84,7 +84,7 @@
                                         @endif
                                         
                                         <td class="col-sm-2"><b>{{ $row->user->firstname}} {{ $row->user->lastname}}</b></td> 
-                                        <td class="col-sm-2">{{ $row->display_name}}</td> 
+                                        <td class="col-sm-2"><a href="{{url('/asset/detail/'.$row->id)}}" class="dropdown-item"> {{ $row->display_name }}</a></td> 
                                         <td class="col-sm-1"><center>{{ $row->category->name_th}}<center></td> 
                                         <td class="col-sm-1"><center>{{ $row->typefile->name}}</center></td> 
                                         <td class="col-sm-2"><center>{{ $row->typefile->formats}}</center></td> 
