@@ -12,8 +12,7 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $category = CategoryModel::orderBy('updated_at', 'desc')->paginate(10);
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
@@ -23,8 +22,7 @@ class CategoryController extends Controller
             compact('category','categories','typefiles','formats','licenses'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //ตรวจสอบข้อมูล
         $request->validate(
             [
@@ -50,8 +48,7 @@ class CategoryController extends Controller
         return redirect('/category');
     }
 
-    public function edit($id)
-    {
+    public function edit($id){
         $category = CategoryModel::orderBy('updated_at', 'desc')->paginate(10);
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
@@ -62,8 +59,7 @@ class CategoryController extends Controller
             compact('category', 'category_edit','categories','typefiles','formats','licenses'));
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //ตรวจสอบข้อมูล
         $request->validate(
             [
@@ -95,8 +91,7 @@ class CategoryController extends Controller
         return redirect('/category');
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
         $category = CategoryModel::find($id);
         if($category->asset->count() > 0){
             Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีชื่อชิ้นงานใช้งานอยู่');
@@ -107,9 +102,7 @@ class CategoryController extends Controller
         return redirect('/category');
     }
 
-    public function search_datatable(Request $request)
-    {
-       
+    public function search_datatable(Request $request){
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
         $licenses = LicenseModel::get();

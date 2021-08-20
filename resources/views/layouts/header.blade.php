@@ -121,8 +121,8 @@
                                 </span>
                             </li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">บัญชีของฉัน</a></li>
                             <li><a class="dropdown-item" href="{{url('/asset/dashboard/'.Auth::user()->id)}}">ชิ้นงานของฉัน</a></li>
+                            <li><a class="dropdown-item" href="#!">บัญชีของฉัน</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"

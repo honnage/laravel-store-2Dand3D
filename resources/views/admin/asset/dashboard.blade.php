@@ -42,7 +42,7 @@
                         </label>
 
                         <label style="float:right;text-align:right;" class="my-2">
-                            <form action="{{url('/license/search/')}}" method="get">
+                            <form action="{{url('/asset/search/')}}" method="get">
                                 <div class="input-group">
                                     <input type="search" name="search" class="form-control" placeholder="ค้นหา ชิ้นงานในระบบ..." style="width: 200px">
                                     <span class="input-group-present">
@@ -78,7 +78,7 @@
                                         <td class="col-sm-1"><img src="{{url($row->image)}}"  width="200px" height="150px"></td> 
                                     
                                         @if ($row->model_path == null)
-                                            <td class="col-sm-1" style="background: #a0a0a0"></td> 
+                                            <td class="col-sm-1" style="background: #a0a0a0;"></td> 
                                         @else
                                             <td class="col-sm-1"><model-viewer src="{{url($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
                                         @endif

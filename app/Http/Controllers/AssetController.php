@@ -184,6 +184,23 @@ class AssetController extends Controller
         Session()->flash('success','ลบข้อมูลเรียบร้อยแล้ว');
         return redirect('/');
     }
+    
+    public function admin_search_datatable(Request $request){
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+
+        $query = AssetModel::query();
+        $search = $request->get('search');
+        $columns = ['display_name', 'description','formats'];
+        foreach ($columns as $column) {
+            $query->orWhere($column, 'LIKE', '%' . $search . '%');
+        }
+        $asset = $query->paginate(10);  
+        return view('admin.asset.dashboard',
+            compact('asset','categories','typefiles','formats','licenses'));
+    }
 
     public function user_search_datatable(Request $request, $id){
         $data = $id;

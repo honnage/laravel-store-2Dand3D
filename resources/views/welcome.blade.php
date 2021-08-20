@@ -29,18 +29,18 @@
                                                 <strong style="font-size: 20px">{{ $row->display_name }}</strong><br>
                                                 <div class="d-flex justify-content-between my-2">
                                                     <div class=" flex-row-reverse">
-                                                        <a type="button" class="btn btn-outline-info">{{ $row->typefile->name }}</a>                                                        
-                                                        <a type="button" class="btn btn-outline-info">{{ $row->typefile->formats }}</a>
+                                                        <a  href="{{url('/search/typefile/'.$row->typefile_id)}}" type="button" class="btn btn-outline-primary">{{ $row->typefile->name }}</a>                                                        
+                                                        <a href="{{url('/search/formats/'.$row->formats)}}" type="button" class="btn btn-outline-primary">{{ $row->typefile->formats }}</a>
                                                     </div>
                                                     <div class="d-flex flex-row-reverse">
                                                         <div class="flex-row-reverse">
-                                                            <a type="button" class="btn btn-outline-info">{{ $row->category->name_th }}</a>
+                                                            <a href="{{url('/search/category/'.$row->category_id)}}" type="button" class="btn btn-outline-primary">{{ $row->category->name_th }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
                                                 <div style="font-size:18px" class="my-2">
-                                                    ราคา:<strong style="color:#17C2A6; font-size: 18px">
+                                                    ราคา:<strong style="color:#0eaf94; font-size: 18px">
                                                         @if ($row->price == 0)
                                                             ฟรี
                                                         @else

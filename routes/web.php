@@ -31,7 +31,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
     Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
     Route::get('asset/search/{id}',[AssetController::class, 'user_search_datatable']);
-   
 });
 
 //admin path only
@@ -57,7 +56,8 @@ Route::middleware(['auth','StatusIS'])->group(function(){
     Route::post('license/destroy/{id}',[LicenseController::class, 'destroy']);
     Route::get('license/search/',[LicenseController::class, 'search_datatable']);
 
-    Route::get('asset/dashboard/',[AssetController::class,'dashboard_admin']);      //userController
+    Route::get('asset/dashboard/',[AssetController::class,'dashboard_admin']);  
+    Route::get('asset/search/',[AssetController::class,'admin_search_datatable']);     
     Route::get('users',[UsersController::class,'index']);                           // UsersController
 });
 
