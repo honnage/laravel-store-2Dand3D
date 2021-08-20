@@ -154,10 +154,9 @@ class AssetController extends Controller
             $typefile_id = $request->typefile_id;
             $typefiles_data = TypefileModel::find($typefile_id);
             $formats = $typefiles_data->formats;
-            // dd( $formats);
+            // dd( $typefiles_data->formats);
 
             $data['formats'] = $formats;
-            //    dd( $formats);
             $data['typefile_id'] = $request->typefile_id;
         }
 
@@ -169,13 +168,7 @@ class AssetController extends Controller
             $data['status_show'] = $request->status_show;
         }
 
-       
-       
         AssetModel::find($id)->update($data);
-
-      
-
-        
         Session()->flash('success', 'อัพเดทข้อมูลเรียบร้อยแล้ว');
         return redirect('/');
     }

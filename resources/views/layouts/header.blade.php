@@ -78,6 +78,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
+            
             <a class="navbar-brand ps-3" href="/">STORE 2D & 3D</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -172,13 +173,9 @@
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="typefile" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                {{-- <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link"  href="{{url('/search/formats/3D')}} ">3D</a>
-                                    <a class="nav-link"  href="{{url('/search/formats/2D')}} ">2D</a>
-                                </nav> --}}
                                 <nav class="sb-sidenav-menu-nested nav">
                                     @foreach( $formats as $format ) 
-                                        <a class="nav-link"  href="{{url('/search/formats/'.$format->formats)}} ">{{ $format->formats }}</a>
+                                        <a class="nav-link" href="{{url('/search/formats/'.$format->formats)}} ">{{ $format->formats }}</a>
                                     @endforeach
                                 </nav>
                             </div> 
@@ -193,7 +190,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     @foreach( $categories as $category ) 
                                         @if($category->asset->count() >= 1 )
-                                            <a class="nav-link"  href="{{url('/search/category/'.$category->id)}} ">{{ $category->name_th }}</a>
+                                            <a class="nav-link" href="{{url('/search/category/'.$category->id)}} ">{{ $category->name_th }}</a>
                                         @endif
                                     @endforeach
                                 </nav>
@@ -209,7 +206,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     @foreach( $typefiles as $typefile ) 
                                         @if($typefile->asset->count() >= 1 )
-                                            <a class="nav-link"  href=" "> {{ $typefile->name }}</a>
+                                            <a class="nav-link" href="{{url('/search/typefile/'.$typefile->id)}} "> {{ $typefile->name }}</a>
                                         @endif
                                     @endforeach
                                 </nav>
@@ -222,4 +219,5 @@
                         Start Bootstrap
                     </div>
                 </nav>
+
             </div>

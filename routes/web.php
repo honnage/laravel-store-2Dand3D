@@ -14,8 +14,8 @@ Auth::routes();
 Route::get('/',[WelcomeController::class,'index']);
 Route::get('search',[WelcomeController::class,'search']);
 Route::get('search/category/{id}',[WelcomeController::class,'search_category']);
-Route::get('search/typefile/{id}',[WelcomeController::class,'search_typefile']);
 Route::get('search/formats/{id}',[WelcomeController::class,'search_formats']);
+Route::get('search/typefile/{id}',[WelcomeController::class,'search_typefile']);
 Route::get('/home', [WelcomeController::class,'index'])->name('home');
 
 Route::get('asset',[AssetController::class,'index']);
@@ -30,7 +30,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('asset/show/{id}',[AssetController::class,'show']);
     Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
     Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
-    
 });
 
 //admin path only

@@ -10,8 +10,7 @@ use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
 
-class WelcomeController extends Controller
-{
+class WelcomeController extends Controller{
     public function index(Request $request){
         $query = AssetModel::query();
         $search = $request->get('search');
@@ -53,6 +52,14 @@ class WelcomeController extends Controller
             compact('asset','categories','typefiles','formats','licenses'));
     }
 
-
+    public function search_typefile(Request $request, $id){
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        $asset = AssetModel::where('typefile_id', $id)->orderBy('updated_at', 'desc')->paginate(16);
+        return view('welcome', 
+            compact('asset','categories','typefiles','formats','licenses'));
+    }
 
 }
