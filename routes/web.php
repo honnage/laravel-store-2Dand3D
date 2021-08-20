@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('asset/detail/{id}',[AssetController::class,'detail']);
     Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
     Route::get('asset/search/{id}',[AssetController::class, 'user_search_datatable']);
+    Route::get('asset/download/{id}',[AssetController::class,'download_file']);
 });
 
 //admin path only

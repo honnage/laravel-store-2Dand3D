@@ -11,9 +11,9 @@ use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
 use App\Models\User;
+use Storage;
 
-class AssetController extends Controller
-{
+class AssetController extends Controller{
     public function dashboard_admin(){
         $asset = AssetModel::orderBy('updated_at', 'desc')->paginate(10);  
         $categories = CategoryModel::get();
@@ -50,7 +50,12 @@ class AssetController extends Controller
             compact('asset','categories','typefiles','formats','licenses','detail','data'));
     }
 
-    
+    public function download_file( $id){
+        $asset = AssetModel::find($id);
+        $path = $asset->asset_path;
+        return response()->download($path);
+    }
+
     public function upload(){
         $user = Auth::user();
         $categories = CategoryModel::all();
