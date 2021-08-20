@@ -10,6 +10,7 @@ use App\Models\AssetModel;
 use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
+use App\Models\User;
 
 class AssetController extends Controller
 {
@@ -28,10 +29,12 @@ class AssetController extends Controller
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
         $licenses = LicenseModel::get();
+        $detail = User::find($id);
+
         $asset = AssetModel::where('user_id',$id)->paginate(10);  
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         return view('asset.dashboard', 
-            compact('asset','categories','typefiles','formats','licenses','data'));
+            compact('asset','categories','typefiles','formats','licenses','detail','data'));
     }
 
     public function upload(){
@@ -141,8 +144,6 @@ class AssetController extends Controller
     }
 
     public function update(Request $request, $id){
-        // $asset_data = AssetModel::find($id);
-        // dd($asset_data->all());
         $data = $request->only(['display_name','description','price']);
         $data['updated_at'] = now();
 
@@ -177,13 +178,30 @@ class AssetController extends Controller
     {
         $asset = AssetModel::find($id);
         AssetModel::find($id)->delete();
-        // $post->tags()->detach($post->post_id);
-
-        // Storage::delete($asset->image);
         File::delete(public_path($asset->image));
         File::delete(public_path($asset->asset_path));
         File::delete(public_path($asset->model_path));
         Session()->flash('success','ลบข้อมูลเรียบร้อยแล้ว');
         return redirect('/');
+    }
+
+    public function user_search_datatable(Request $request, $id){
+        $data = $id;
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $detail = User::find($id);
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+
+        $query = AssetModel::query();
+        $search = $request->get('search');
+        $columns = ['display_name', 'description','formats'];
+        foreach ($columns as $column) {
+            $query->where($column, 'LIKE', '%' . $search . '%');
+        }
+        $asset = $query->paginate(10);  
+
+        return view('asset.dashboard', 
+            compact('asset','categories','typefiles','formats','licenses','detail','data'));
     }
 }

@@ -27,7 +27,7 @@
                 <div class="col-xl-12 my-2">
                     <div class="d-flex justify-content-between">
                         <div class=" flex-row-reverse  ">
-                            <h1 class="text-left">ชิ้นงานของฉัน</h1>
+                            <h1 class="text-left">ชิ้นงานของคุณ {{$detail->firstname}} {{$detail->lastname}}</h1>
                         </div>
                     </div>
                 </div>
@@ -38,11 +38,11 @@
                  
                         <label class="my-2">
                             <i class="fas fa-table me-1"></i>
-                            <span>ตารางข้อมูล ชิ้นงานของฉัน</span> 
+                            <span>ตารางข้อมูล รายละเอียดชิ้นงาน</span> 
                         </label>
 
                         <label style="float:right;text-align:right;" class="my-2">
-                            <form action="{{url('/license/search/')}}" method="get">
+                            <form action="{{url('/asset/search/'.$detail->id)}}" method="get">
                                 <div class="input-group">
                                     <input type="search" name="search" class="form-control" placeholder="ค้นหา ชิ้นงานในระบบ..." style="width: 200px">
                                     <span class="input-group-present">
@@ -125,6 +125,13 @@
                         @else
                             <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลชิ้นงานในระบบ --</h3>
                         @endif
+
+                        @if (Auth::user()->isStatus != "0" || Auth::user()->id == 1)
+                            <div class="d-flex flex-row-reverse bd-highlight my-4">
+                                <a href="/users"  class="btn btn-outline-dark col-sm-1">ย้อนกลับ</a>
+                            </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>

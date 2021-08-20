@@ -30,6 +30,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('asset/show/{id}',[AssetController::class,'show']);
     Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
     Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
+    Route::get('asset/search/{id}',[AssetController::class, 'user_search_datatable']);
+   
 });
 
 //admin path only

@@ -78,7 +78,7 @@
                                                 เจ้าหน้าที่
                                             @else
                                                 ผู้ใช้งาน
-                                            @endif
+                                            @endif 
                                         </td>
                                         <td>
                                             <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/users/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
@@ -97,9 +97,6 @@
                             <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลผู้ใช้ในระบบ --</h3>
                         @endif
 
-                        <div class="d-flex flex-row-reverse bd-highlight my-4">
-                            <a href="/users"  class="btn btn-outline-dark col-sm-1">ย้อนกลับ</a>
-                        </div>
                     </div>
                 </div>
             </div>
