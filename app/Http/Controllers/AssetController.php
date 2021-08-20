@@ -11,7 +11,6 @@ use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
 use App\Models\User;
-use Storage;
 
 class AssetController extends Controller{
     public function dashboard_admin(){
@@ -48,12 +47,6 @@ class AssetController extends Controller{
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         return view('asset.detail', 
             compact('asset','categories','typefiles','formats','licenses','detail','data'));
-    }
-
-    public function download_file( $id){
-        $asset = AssetModel::find($id);
-        $path = $asset->asset_path;
-        return response()->download($path);
     }
 
     public function upload(){

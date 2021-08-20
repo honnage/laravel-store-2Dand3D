@@ -58,7 +58,13 @@
                                 <a href="{{url('/search/category/'.$asset->category_id)}}" type="button" class="btn btn-outline-primary">{{ $asset->category->name_th }}</a>
                                 <a href="{{url('/search/typefile/'.$asset->typefile_id)}}" type="button" class="btn btn-outline-primary">{{ $asset->typefile->name }}</a>                                                        
                                 <a href="{{url('/search/formats/'.$asset->formats)}}" type="button" class="btn btn-outline-primary">{{ $asset->typefile->formats }}</a>
-                                <a href="{{url('/asset/download/'.$asset->id)}}" type="button" style="float:right;" class="btn btn-outline-success">โหลดชิ้นงาน</a>
+                                <a href="{{url('/download/asset/'.$asset->id)}}" type="button" style="float:right;" class="btn btn-outline-success">โหลดชิ้นงาน</a>
+                            </div>
+
+                             {{-- full name --}}
+                             <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
+                                <strong class="col-sm-3">จำนวนดาวน์โหลด: </strong>
+                                {{number_format( $asset->download->count())}} ครั้ง
                             </div>
 
                             {{-- full name --}}

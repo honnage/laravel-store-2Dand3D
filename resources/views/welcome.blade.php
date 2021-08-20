@@ -29,12 +29,15 @@
                                                 <strong style="font-size: 20px"><a href="{{url('/asset/detail/'.$row->id)}}" class="dropdown-item"> {{ $row->display_name }}</a></strong>
                                                 <div class="d-flex justify-content-between my-2">
                                                     <div class=" flex-row-reverse">
+                                                        <a href="{{url('/search/category/'.$row->category_id)}}" type="button" class="btn btn-outline-primary">{{ $row->category->name_th }}</a>
                                                         <a href="{{url('/search/typefile/'.$row->typefile_id)}}" type="button" class="btn btn-outline-primary">{{ $row->typefile->name }}</a>                                                        
                                                         <a href="{{url('/search/formats/'.$row->formats)}}" type="button" class="btn btn-outline-primary">{{ $row->typefile->formats }}</a>
                                                     </div>
                                                     <div class="d-flex flex-row-reverse">
                                                         <div class="flex-row-reverse">
-                                                            <a href="{{url('/search/category/'.$row->category_id)}}" type="button" class="btn btn-outline-primary">{{ $row->category->name_th }}</a>
+                                                            <a href="{{url('/search/category/'.$row->category_id)}}" type="button" class="btn btn-outline-success"> 
+                                                                {{number_format( $row->download->count())}} <i class="fas fa-download"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>

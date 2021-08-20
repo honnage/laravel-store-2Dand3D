@@ -8,7 +8,7 @@ use App\Http\Controllers\TypefileController;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AssetController;
-use App\Models\User;
+use App\Http\Controllers\DownloadController;
 
 Auth::routes();
 Route::get('/',[WelcomeController::class,'index']);
@@ -16,6 +16,7 @@ Route::get('search',[WelcomeController::class,'search']);
 Route::get('search/category/{id}',[WelcomeController::class,'search_category']);
 Route::get('search/formats/{id}',[WelcomeController::class,'search_formats']);
 Route::get('search/typefile/{id}',[WelcomeController::class,'search_typefile']);
+Route::get('asset/detail/{id}',[AssetController::class,'detail']);
 Route::get('/home', [WelcomeController::class,'index'])->name('home');
 
 Route::get('asset',[AssetController::class,'index']);
@@ -24,15 +25,14 @@ Route::get('asset',[AssetController::class,'index']);
 Route::middleware(['auth'])->group(function(){
     Route::get('asset/upload',[AssetController::class,'upload']);                   // AssetController
     Route::post('asset/store',[AssetController::class,'store']);
-
     Route::get('asset/edit/{id}',[AssetController::class,'edit']);
     Route::post('asset/update/{id}',[AssetController::class, 'update']);
     Route::get('asset/show/{id}',[AssetController::class,'show']);
     Route::get('asset/dashboard/{id}',[AssetController::class,'dashboard_user']);
-    Route::get('asset/detail/{id}',[AssetController::class,'detail']);
     Route::post('asset/destroy/{id}',[AssetController::class, 'destroy']);
     Route::get('asset/search/{id}',[AssetController::class, 'user_search_datatable']);
-    Route::get('asset/download/{id}',[AssetController::class,'download_file']);
+
+    Route::get('download/asset/{id}',[DownloadController::class,'download']);
 });
 
 //admin path only

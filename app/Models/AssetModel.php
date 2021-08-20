@@ -42,4 +42,8 @@ class AssetModel extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function download(){
+        return $this->hasMany(DownloadModel::class, 'asset_id');      
+    }
 }
