@@ -66,8 +66,9 @@
                                         <th><center>นามสกุลไฟล์</center></th>
                                         <th><center>รูปแบบ</center></th>
                                         <th><center>ราคา</center></th>
-                                        <th><center>ดาวน์โหลด</center></th>
                                         <th><center>แสดงชิ้นงาน</center></th>
+                                        <th><center>ดาวน์โหลด</center></th>
+                                        <th><center>รายงาน</center></th>
 
                                         @if(Auth::user()->id == $data)
                                             <th><center>แก้ไข</center></th>
@@ -93,16 +94,17 @@
                                         <td class="col-sm-1"><center>{{ $row->typefile->name}}</center></td> 
                                         <td class="col-sm-2"><center>{{ $row->typefile->formats}} </center></td> 
                                         <td style="text-align:right;">{{ number_format( $row->price )}}</td>
-                                        <td class="col-sm-1"><center>{{ number_format( $row->download->count() )}}<center></td>
-
+                                    
                                         <td class="col-sm-2">
-
                                             @if($row->status_show == 0)
                                                 <center>รูปภาพ</center>
                                             @elseif ($row->status_show == 1)
                                                 <center>โมเดล</center>
                                             @endif
                                         </td> 
+                                        <td class="col-sm-1"><center>{{number_format( $row->download->count() )}}<center></td>
+                                        <td class="col-sm-1"><center>{{number_format( $row->report->count() )}}<center></td>
+
 
                                         @if(Auth::user()->id == $row->user_id)
                                             <td>

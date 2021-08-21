@@ -46,4 +46,8 @@ class AssetModel extends Model
     public function download(){
         return $this->hasMany(DownloadModel::class, 'asset_id');      
     }
+
+    public function report(){
+        return $this->hasMany(ReportModel::class, 'asset_id');      
+    }
 }

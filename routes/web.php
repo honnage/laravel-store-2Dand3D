@@ -9,6 +9,7 @@ use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\ReportController;
 
 Auth::routes();
 Route::get('/',[WelcomeController::class,'index']);
@@ -33,9 +34,12 @@ Route::middleware(['auth'])->group(function(){
     Route::get('asset/search/{id}',[AssetController::class, 'user_search_datatable']);
 
     Route::get('download/asset/{id}',[DownloadController::class,'download']);
-
     Route::get('users/edit/{id}',[UsersController::class,'edit']);
     Route::post('users/update/{id}',[UsersController::class, 'update']);
+
+    Route::get('report/asset/{id}',[ReportController::class,'report']);   
+    Route::post('report/store/{id}',[ReportController::class,'store']);
+    Route::get('report/datails/{id}',[ReportController::class,'datails']); 
 });
 
 //admin path only
@@ -68,6 +72,8 @@ Route::middleware(['auth','StatusIS'])->group(function(){
     Route::get('users/edit-status/{id}',[UsersController::class,'edit_status']);
     Route::post('users/update/status/{id}',[UsersController::class, 'update_status']);
     Route::get('users/search/',[UsersController::class,'search_datatable']); 
+
+    
  
 });
 

@@ -67,8 +67,9 @@
                                         <th><center>นามสกุลไฟล์</center></th>
                                         <th><center>รูปแบบ</center></th>
                                         <th><center>ราคา</center></th>
-                                        <th><center>ดาวน์โหลด</center></th>
                                         <th><center>แสดงชิ้นงาน</center></th>
+                                        <th><center>ดาวน์โหลด</center></th>
+                                        <th><center>รายงาน</center></th>
                                         <th><center>รายละเอียด</center></th>
                                     </tr>
                                 </thead>
@@ -83,14 +84,12 @@
                                         @else
                                             <td class="col-sm-1"><model-viewer src="{{url($row->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6; width:200px;"></model-viewer></td> 
                                         @endif
-                                        
                                         <td class="col-sm-1"><b>{{ $row->user->firstname}} {{ $row->user->lastname}}</b></td> 
                                         <td class="col-sm-1"><a href="{{url('/asset/detail/'.$row->id)}}" class="dropdown-item"> {{ $row->display_name }}</a></td> 
                                         <td class="col-sm-1"><center>{{ $row->category->name_th}}<center></td> 
                                         <td class="col-sm-1"><center>{{ $row->typefile->name}}</center></td> 
                                         <td class="col-sm-1"><center>{{ $row->typefile->formats}}</center></td> 
                                         <td class="col-sm-1" style="text-align:right;">{{ number_format( $row->price )}}</td>
-                                        <td class="col-sm-1"><center>{{ number_format( $row->download->count() )}}<center></td>
                                         @if($row->status_show == 0)
                                             <td class="col-sm-2"><center>รูปภาพ</center></td> 
                                         @elseif ($row->status_show == 1)   
@@ -98,9 +97,11 @@
                                         @else
                                             <td></td>
                                         @endif
-                                        
+                                        <td class="col-sm-1"><center>{{number_format( $row->download->count() )}}<center></td>
+                                        <td class="col-sm-1"><center>{{number_format( $row->report->count() )}}<center></td>
+
                                         <td class="col-sm-2">
-                                            <center><a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/asset/detail/'.$row->id)}}"><i class="fas fa-eye"></i></a></center>
+                                            <center><a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/report/datails/'.$row->id)}}"><i class="fas fa-eye"></i></a></center>
                                         </td>
                                     </tr>
                                 </tbody>

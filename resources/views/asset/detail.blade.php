@@ -58,7 +58,8 @@
                                 <a href="{{url('/search/category/'.$asset->category_id)}}" type="button" class="btn btn-outline-primary">{{ $asset->category->name_th }}</a>
                                 <a href="{{url('/search/typefile/'.$asset->typefile_id)}}" type="button" class="btn btn-outline-primary">{{ $asset->typefile->name }}</a>                                                        
                                 <a href="{{url('/search/formats/'.$asset->formats)}}" type="button" class="btn btn-outline-primary">{{ $asset->typefile->formats }}</a>
-                                <a href="{{url('/download/asset/'.$asset->id)}}" type="button" style="float:right;" class="btn btn-outline-success">โหลดชิ้นงาน</a>
+                                <a href="{{url('/report/asset/'.$asset->id)}}" type="button" class="btn btn-outline-danger"><i class="fas fa-exclamation-triangle"></i>&nbsp; รายงาน</a> 
+                                <a href="{{url('/download/asset/'.$asset->id)}}" type="button" style="float:right;" class="btn btn-outline-success"><i class="fas fa-download"></i>&nbsp; โหลดชิ้นงาน</a> 
                             </div>
 
                              {{-- full name --}}
