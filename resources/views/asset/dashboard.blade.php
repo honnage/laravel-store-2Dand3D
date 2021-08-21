@@ -104,8 +104,14 @@
                                         </td> 
                                         <td class="col-sm-1"><center>{{number_format( $row->download->count() )}}<center></td>
                                         <td class="col-sm-1"><center>{{number_format( $row->report->count() )}}<center></td>
-
-                                        <td class="col-sm-1">  <center><a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/report/datails/'.$row->id)}}"><i class="fas fa-eye"></i></a></center></td>
+                                        
+                                        
+                                        <td class="col-sm-1">  
+                                            @if ($row->report->count() > 0)
+                                                <center><a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/report/datails/'.$row->id)}}"><i class="fas fa-eye"></i></a></center>
+                                            @endif
+                                        </td>
+                                           
 
                                         @if(Auth::user()->id == $row->user_id)
                                             <td>

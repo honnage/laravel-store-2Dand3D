@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('report/asset/{id}',[ReportController::class,'report']);   
     Route::post('report/store/{id}',[ReportController::class,'store']);
     Route::get('report/datails/{id}',[ReportController::class,'datails']); 
+
+    Route::get('report/search/{id}',[ReportController::class,'search_datatable']); 
 });
 
 //admin path only

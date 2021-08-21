@@ -95,15 +95,17 @@
                                         @elseif ($row->status_show == 1)   
                                             <td class="col-sm-2"><center>โมเดล</center></td>
                                         @else
-                                            <td></td>
+                                            <td class="col-sm-2"><center>ปิดการแสดง</center></td>
                                         @endif
                                         <td class="col-sm-1"><center>{{number_format( $row->download->count() )}}<center></td>
                                         <td class="col-sm-1"><center>{{number_format( $row->report->count() )}}<center></td>
 
                                         <td class="col-sm-2">
+                                            @if ($row->report->count() > 0)
                                             <center>
                                                 <a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/report/datails/'.$row->id)}}"><i class="fas fa-eye"></i></a>
                                             </center>
+                                            @endif
                                         </td>
                                         <td class="col-sm-2">
                                             <center>

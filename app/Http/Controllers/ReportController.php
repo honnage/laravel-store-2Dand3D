@@ -105,4 +105,24 @@ class ReportController extends Controller
         return redirect('/asset/dashboard');
     }
 
+    public function search_datatable(Request $request, $id)
+    {
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        $asset = AssetModel::find($id);
+
+        $query = ReportModel::where('asset_id',$id);
+        $search = $request->get('search');
+        $columns = ['description'];
+        foreach ($columns as $column) {
+            $query->where($column, 'LIKE', '%' . $search . '%');
+        }
+        $report = $query->paginate(10);  
+
+        return view('report.details', 
+            compact('categories','typefiles','formats','licenses','asset','report'));
+    }
+
 }

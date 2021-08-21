@@ -45,13 +45,13 @@
                  
                         <label class="my-2">
                             <i class="fas fa-table me-1"></i>
-                            <span>ตารางข้อมูล รายงานของชิ้นงาน {{$asset->display_name}}</span> 
+                            <span>ตารางข้อมูล การรายงานของชิ้นงาน {{$asset->display_name}}</span> 
                         </label>
 
                         <label style="float:right;text-align:right;" class="my-2">
-                            <form action="{{url('/category/search/')}}" method="get">
+                            <form action="{{url('/report/search/'.$asset->id)}}" method="get">
                                 <div class="input-group">
-                                    <input type="search" name="search" class="form-control" placeholder="ค้นหา หมวดหมู่..." style="width: 200px">
+                                    <input type="search" name="search" class="form-control" placeholder="ค้นหา รายงาน..." style="width: 200px">
                                     <span class="input-group-present">
                                         <button type="submit" class="btn btn-primary"  id="btnNavbarSearch">ค้นหา</button>
                                     </span>
@@ -91,7 +91,7 @@
                                 {{  $report->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else
-                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลหมวดหมู่ --</h3>
+                            <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลการรายงาน --</h3>
                         @endif
                     </div>
                 </div>
