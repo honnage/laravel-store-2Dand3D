@@ -34,10 +34,11 @@
                         <div class=" flex-row-reverse  ">
                             <h1 class="text-left">ประเภทนามสกุลไฟล์</h1>
                         </div>
-                        <div class="d-flex flex-row-reverse  ">
-                            <button href="#" class=" slideToggle_table btn btn-outline-success" >ฟอร์มข้อมูล </button>
-                            {{-- <button href="#" class="slideToggle_table btn btn-outline-success" >กราฟ </button> --}}
-                        </div>
+                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
+                            <div class="d-flex flex-row-reverse  ">
+                                <button href="#" class=" slideToggle_table btn btn-outline-success" >ฟอร์มข้อมูล </button>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 
@@ -117,8 +118,10 @@
                                         <th>รูปแบบ</th>
                                         <th>คำอธิบาย</th>
                                         <th>จำนวน</th>
-                                        <th><center>แก้ไข</center></th>
-                                        <th><center>ลบ</center></th>
+                                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
+                                            <th><center>แก้ไข</center></th>
+                                            <th><center>ลบ</center></th>
+                                        @endif 
                                     </tr>
                                 </thead>
                                 @foreach($data as $row)
@@ -129,15 +132,18 @@
                                         <td class="col-sm-2">{{ $row->formats}}</td>
                                         <td class="col-sm-8">{{ $row->description}}</td>
                                         <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
-                                        <td>
-                                            <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/typefile/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
-                                        </td>
-                                        <td>
-                                            <form class="delete_form" action="{{url('/typefile/destroy/'.$row->id)}}" method="post">
-                                                {{csrf_field()}}
-                                                <a style="color:white; width: 50px" data-name="{{$row->name}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
-                                            </form>
-                                        </td>
+                               
+                                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
+                                            <td>
+                                                <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/typefile/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
+                                            </td>
+                                            <td>
+                                                <form class="delete_form" action="{{url('/typefile/destroy/'.$row->id)}}" method="post">
+                                                    {{csrf_field()}}
+                                                    <a style="color:white; width: 50px" data-name="{{$row->name}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                            </td>
+                                        @endif 
                                     </tr>
                                 </tbody>
                                 @endforeach

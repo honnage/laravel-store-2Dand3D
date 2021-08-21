@@ -34,10 +34,12 @@
                         <div class=" flex-row-reverse  ">
                             <h1 class="text-left">ประเภทเผยเเพร่</h1>
                         </div>
-                        <div class="d-flex flex-row-reverse  ">
-                            <button href="#" class=" slideToggle_table btn btn-outline-success" >ฟอร์มข้อมูล </button>
-                            {{-- <button href="#" class="slideToggle_table btn btn-outline-success" >กราฟ </button> --}}
-                        </div>
+                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
+                            <div class="d-flex flex-row-reverse  ">
+                                <button href="#" class=" slideToggle_table btn btn-outline-success" >ฟอร์มข้อมูล </button>
+                                {{-- <button href="#" class="slideToggle_table btn btn-outline-success" >กราฟ </button> --}}
+                            </div>
+                        @endif
                     </div>
                 </div>
                 
@@ -110,9 +112,11 @@
                                         <th>ลำดับ</th>
                                         <th>ประเภทเผยเเพร่ สำหรับภาษาไทย</th>
                                         <th>ประเภทเผยเเพร่ สำหรับภาษาอังกฤษ</th>
-                                        <th>จำนวน</th>
-                                        <th><center>แก้ไข</center></th>
-                                        <th><center>ลบ</center></th>
+                                        <th><center>จำนวน</center></th>
+                                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
+                                            <th><center>แก้ไข</center></th>
+                                            <th><center>ลบ</center></th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 @foreach($license as $row)
@@ -122,15 +126,17 @@
                                         <td class="col-sm-6">{{ $row->name_th}}</td>
                                         <td class="col-sm-6">{{ $row->name_en}}</td>
                                         <td class="col-sm-1"><center>{{ number_format( $row->asset->count() )}}<center></td>
-                                        <td>
-                                            <a class="btn btn-warning col-sm-12" href="{{url('/license/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
-                                        </td>
-                                        <td>
-                                            <form class="delete_form" action="{{url('/license/destroy/'.$row->id)}}" method="post">
-                                                {{csrf_field()}}
-                                                <a style="color:white" data-name="{{$row->name_th}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
-                                            </form>
-                                        </td>
+                                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
+                                            <td>
+                                                <a class="btn btn-warning col-sm-12" href="{{url('/license/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
+                                            </td>
+                                            <td>
+                                                <form class="delete_form" action="{{url('/license/destroy/'.$row->id)}}" method="post">
+                                                    {{csrf_field()}}
+                                                    <a style="color:white" data-name="{{$row->name_th}}" class="btn btn-danger deleteform"> <i class="fas fa-trash-alt"></i></a>
+                                                </form>
+                                            </td>
+                                        @endif
                                     </tr>
                                 </tbody>
                                 @endforeach

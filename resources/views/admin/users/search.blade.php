@@ -39,7 +39,7 @@
                             <span>ตารางข้อมูล ผู้ใช้งานในระบบ</span> 
                         </label>
                        
-                        <label  class="float-end my-2">
+                        <label class="float-end my-2">
                             <form action="{{url('/users/search/')}}" method="get">
                                 <div class="input-group">
                                     <input type="search" name="search" class="form-control" placeholder="ค้นหา ข้อมูลผู้ใช้..." style="width: 200px">
@@ -90,8 +90,6 @@
                                         <td>
                                             <a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/asset/dashboard/'.$row->id)}}"><i class="fas fa-eye"></i></a>
                                         </td>
-                                     
-                                        
                                     </tr>
                                 </tbody>
                                 @endforeach
@@ -103,6 +101,9 @@
                             <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลผู้ใช้ในระบบ --</h3>
                         @endif
 
+                        <div class="d-flex flex-row-reverse bd-highlight my-4">
+                            <a href="/users"  class="btn btn-outline-dark col-sm-1">ย้อนกลับ</a>
+                        </div>
                     </div>
                 </div>
             </div>

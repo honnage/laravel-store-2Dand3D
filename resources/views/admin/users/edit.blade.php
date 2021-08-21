@@ -30,63 +30,69 @@
             </div>
 
             <div class="col-xl-6 my-4">
-                <div class="card mb-4" >
+                <div class="card mb-4"  id="form_data" >
+                    <div class="card-header">
+                        ข้อมูลบัญชีของฉัน
+                    </div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <div class="row form-inline">
-                            {{-- display name --}}
-                            <div class="d-flex justify-content-between">
-                                <div class=" flex-row-reverse  ">
-                                    <h1 class="text-left"> </h1>
-                                </div>                            
+                    
+                        @if ($users->image != 0)
+                            <center><img src="{{url($users->image)}}" style="border-radius: 50%; width: 200px; height: 200px;"></center>
+                        @else
+                            <center><div style="background:#979797; border-radius: 50%; width: 200px; height: 200px; "></div></center>
+                        @endif
+                    
+                        <form action="{{url('/users/update/status/'.$users->id)}}" method="post" enctype="multipart/form-data">
+                            {{csrf_field()}}
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
+                                <strong class="col-sm-12">อีเมล :</strong><br>
+                                <input type="text" class="col-sm-12 col-form-label form-control"  name="email" id="email"  value="{{$users->email}}" readonly>
+                            </div>
+                
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
+                                <strong class="col-sm-12">ชื่อจริง :</strong><br>
+                                <input type="text" class="col-sm-12 col-form-label form-control"  name="firstname" id="firstname"  value="{{$users->firstname}}" readonly>
                             </div>
 
-                      
-
-
-                             {{-- full name --}}
-                             <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
-                                <strong class="col-sm-3">จำนวนดาวน์โหลด  </strong>
-                                {{-- {{number_format( $asset->download->count())}} ครั้ง --}}
+                            <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
+                                <strong class="col-sm-12">นามสกุล :</strong><br>
+                                <input type="text" class="col-sm-12 col-form-label form-control" name="lastname" id="lastname" value="{{$users->lastname}}" readonly>
+                            </div>
+                            
+                            <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
+                                <strong class="col-sm-12">สถานะ :</strong><br>
+                                <select class="form-control js-example-basic-multiple" name="isStatus" id="isStatus">
+                                    @if ($users->isStatus == 10 || $users->id == 1)
+                                        <option value="10" style="color:red;">ผู้ดูแลระบบ</option> 
+                                        <option value="5">เจ้าหน้าที่</option>
+                                        <option value="1">ผู้ใช้งาน</option> 
+                                    @elseif($users->isStatus == 5)
+                                        <option value="5" style="color:red;">เจ้าหน้าที่</option>
+                                        <option value="10">ผู้ดูแลระบบ</option>
+                                        <option value="1">ผู้ใช้งาน</option>
+                                    @else
+                                        <option value="1" style="color:red;">ผู้ใช้งาน</option>
+                                        <option value="10">ผู้ดูแลระบบ</option>
+                                        <option value="5">เจ้าหน้าที่</option>
+                                    @endif
+                                </select>
                             </div>
 
-                            {{-- full name --}}
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
-                                <strong class="col-sm-3">ผู้อัพโหลด  </strong>
-                                {{-- {{$asset->user->firstname}} {{$asset->user->lastname}} --}}
+                            <div class="d-flex flex-row-reverse bd-highlight form-group my-4">
+                                <button type="submit" name="submit" class="btn btn-success col-sm-2">อัพเดทข้อมูล</button>
+                                &nbsp;&nbsp;
+                                <button class="btn btn-secondary col-sm-1" width="100%" type="reset">ยกเลิก</button>
                             </div>
 
-                            {{-- price --}}
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
-                                <strong class="col-sm-3">ราคา  </strong>
-                                {{-- <label >{{$asset->price}} บาท</label> --}}
-                            </div>
-
-                            {{-- description --}}
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
-                                <strong class="col-sm-3">คำอธิบาย  </strong>
-                                {{-- {!!$asset->description!!}     --}}
-                            </div>
-
-                            {{-- license --}}
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
-                                <strong class="col-sm-3">ประเภทการเผยเเพร่ </strong>
-                                {{-- <label >{{$asset->license->name_th}}</label> --}}
-                            </div>
-
-                            {{-- date  --}}
-                            {{-- <div class="form-group col-xs-12 col-sm-12 col-md-12 my-4">
-                                <strong class="col-sm-3">วันที่แก้ไขล่าสุด </strong><span class="col-sm-9">{{$asset->updated_at}}</span>
-                                <strong class="col-sm-3">วันที่อัพโหลด </strong><span class="col-sm-9">{{$asset->created_at}}</span>
-                            </div> --}}
-                  
-                        
-                        </div>
+                        </form>
                     </div>
+        
                 </div>
             </div>
 

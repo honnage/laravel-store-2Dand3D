@@ -61,7 +61,7 @@ class UsersController extends Controller
             $image_path = $image_location.$image_gen.".".$image_ext;
 
             DB::table('users')
-            ->where('id', '=', $id)
+            ->where('id', '=', Auth::user()->id)
             ->update([
                 'image' =>   $image_path,
                 'updated_at' => now(),
@@ -70,14 +70,12 @@ class UsersController extends Controller
         }
      
         DB::table('users')
-        ->where('id', '=', $id)
+        ->where('id', '=', Auth::user()->id)
         ->update([
             'firstname' => $request->firstname,
             'lastname' =>  $request->lastname,
             'updated_at' => now(),
         ]);
-
-        // dd($request->all());
         Session()->flash('success', 'อัพเดทข้อมูลเรียบร้อยแล้ว');
         return redirect('/');
     }
@@ -87,9 +85,38 @@ class UsersController extends Controller
         $categories = CategoryModel::get();
         $typefiles = TypefileModel::get();
         $licenses = LicenseModel::get();
-        $license_edit = LicenseModel::find($id);
+        $users = User::find($id);
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
-        return view('.adminusers.edit', 
-            compact('license', 'license_edit','categories','typefiles','formats','licenses'));
+        return view('.admin.users.edit', 
+            compact('license','users','categories','typefiles','formats','licenses'));
+    }
+
+    public function update_status(Request $request, $id){
+        DB::table('users')
+        ->where('id', '=', $id)
+        ->update([
+            'isStatus' => $request->isStatus,
+            'updated_at' => now(),
+        ]);
+        Session()->flash('success', 'อัพเดทข้อมูลเรียบร้อยแล้ว');
+        return redirect('/users');
+    }
+    
+    public function search_datatable(Request $request){
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+
+        $query = User::query();
+        $search = $request->get('search');
+        $columns = ['firstname', 'lastname','email'];
+        foreach ($columns as $column) {
+            $query->orWhere($column, 'LIKE', '%' . $search . '%');
+        }
+
+        $users = $query->paginate(10);
+        return view('admin.users.search', 
+            compact('users', 'search','categories','typefiles','formats','licenses'));
     }
 }

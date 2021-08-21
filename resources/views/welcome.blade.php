@@ -1,23 +1,23 @@
 @extends('layouts.index')
 @section('content')
     <div id="layoutSidenav_content" style="background: #f8f8f8">
-    @if(Session()->has('warning'))
-        <div class="alert alert-danger" role="alert">
-            {{Session()->get('warning')}}
-        </div>
-    @endif
-    @if(Session()->has('success'))
-        <div class="alert alert-success" role="alert">
-            {{Session()->get('success')}}
-        </div>
-    @endif
-    @if(Session()->has('error'))
-        <div class="alert alert-danger" role="alert">
-            {{Session()->get('error')}}
-        </div>
-    @endif
         <main>
             <section >
+            @if(Session()->has('warning'))
+                <div class="alert alert-danger" role="alert">
+                    {{Session()->get('warning')}}
+                </div>
+            @endif
+            @if(Session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{Session()->get('success')}}
+                </div>
+            @endif
+            @if(Session()->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{Session()->get('error')}}
+                </div>
+            @endif
                 <div class="container-fluid px-4">
                 {{-- <div class="container" data-aos="fade-up"> --}}
                     <div class="row my-2">
@@ -77,9 +77,11 @@
                         @endif
                        
                     </div>
-                    <div class="pagination-block">
-                        {{  $asset->appends(request()->input())->links('layouts.paginationlinks') }}
+                 
+                    <div class="pagination-block my-2" style="float:right">
+                        {{ $asset->appends(request()->input())->links('layouts.paginationlinks') }}
                     </div>
+                  
                 </div>
             </section>
 
