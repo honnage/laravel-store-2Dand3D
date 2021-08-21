@@ -111,9 +111,16 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                            <i class="fas fa-user fa-fw"></i>
-                        </a>
+                        @if(Auth::user()->image != 0)
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                                <img src="{{url(Auth::user()->image)}}" style="border-radius: 50%; width: 30px; height: 30px" >
+                            </a>
+                        @else
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                                <i class="fas fa-user fa-fw"></i>
+                            </a>
+                        @endif
+                       
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li> 
                                 <span class="dropdown-item">
@@ -122,12 +129,12 @@
                             </li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="{{url('/asset/dashboard/'.Auth::user()->id)}}">ชิ้นงานของฉัน</a></li>
-                            <li><a class="dropdown-item" href="#!">บัญชีของฉัน</a></li>
+                            <li><a class="dropdown-item" href="{{url('/users/edit/'.Auth::user()->id)}}">บัญชีของฉัน</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                     {{ __('ออกจากระบบ') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

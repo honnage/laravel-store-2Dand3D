@@ -61,12 +61,12 @@
                                     
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
                                         <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label"  name="name" id="name" placeholder="เช่น odj ">
+                                        <input type="text" class="col-sm-12 col-form-label form-control"  name="name" id="name" placeholder="เช่น odj ">
                                     </div>
         
                                     <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
                                         <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label" name="description" id="description" placeholder="เช่น เป็นรูปแบบไฟล์ที่ใช้สำหรับวัตถุสามมิติที่มีพิกัด 3D ">
+                                        <input type="text" class="col-sm-12 col-form-label form-control" name="description" id="description" placeholder="เช่น เป็นรูปแบบไฟล์ที่ใช้สำหรับวัตถุสามมิติที่มีพิกัด 3D ">
                                     </div>
 
                                     <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">

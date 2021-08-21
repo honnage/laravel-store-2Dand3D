@@ -41,61 +41,48 @@
                             {{-- display name --}}
                             <div class="d-flex justify-content-between">
                                 <div class=" flex-row-reverse  ">
-                                    <h1 class="text-left"> {{$asset->display_name}}</h1>
+                                    <h1 class="text-left"> </h1>
                                 </div>                            
                             </div>
 
-                            {{-- show image or model --}}
-                            <div class="my-2">
-                                <img src="{{url($asset->image)}}" width="100%" height="100%">
-                                @if($asset->model_path != null )
-                                    <model-viewer  class="my-2" width="100%" height="100%" src="{{asset($asset->model_path)}}"  auto-rotate camera-controls  style="background: #17C2A6;"></model-viewer>
-                                @endif
-                            </div>
+                      
 
-                            {{-- tags --}}
-                            <div class="my-4">
-                                <a href="{{url('/search/category/'.$asset->category_id)}}" type="button" class="btn btn-outline-primary">{{ $asset->category->name_th }}</a>
-                                <a href="{{url('/search/typefile/'.$asset->typefile_id)}}" type="button" class="btn btn-outline-primary">{{ $asset->typefile->name }}</a>                                                        
-                                <a href="{{url('/search/formats/'.$asset->formats)}}" type="button" class="btn btn-outline-primary">{{ $asset->typefile->formats }}</a>
-                                <a href="{{url('/download/asset/'.$asset->id)}}" type="button" style="float:right;" class="btn btn-outline-success">โหลดชิ้นงาน</a>
-                            </div>
 
                              {{-- full name --}}
                              <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
                                 <strong class="col-sm-3">จำนวนดาวน์โหลด  </strong>
-                                {{number_format( $asset->download->count())}} ครั้ง
+                                {{-- {{number_format( $asset->download->count())}} ครั้ง --}}
                             </div>
 
                             {{-- full name --}}
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
                                 <strong class="col-sm-3">ผู้อัพโหลด  </strong>
-                                {{$asset->user->firstname}} {{$asset->user->lastname}}
+                                {{-- {{$asset->user->firstname}} {{$asset->user->lastname}} --}}
                             </div>
 
                             {{-- price --}}
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
                                 <strong class="col-sm-3">ราคา  </strong>
-                                <label >{{$asset->price}} บาท</label>
+                                {{-- <label >{{$asset->price}} บาท</label> --}}
                             </div>
 
                             {{-- description --}}
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
                                 <strong class="col-sm-3">คำอธิบาย  </strong>
-                                {!!$asset->description!!}    
+                                {{-- {!!$asset->description!!}     --}}
                             </div>
 
                             {{-- license --}}
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 my-2">
                                 <strong class="col-sm-3">ประเภทการเผยเเพร่ </strong>
-                                <label >{{$asset->license->name_th}}</label>
+                                {{-- <label >{{$asset->license->name_th}}</label> --}}
                             </div>
 
                             {{-- date  --}}
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 my-4">
+                            {{-- <div class="form-group col-xs-12 col-sm-12 col-md-12 my-4">
                                 <strong class="col-sm-3">วันที่แก้ไขล่าสุด </strong><span class="col-sm-9">{{$asset->updated_at}}</span>
                                 <strong class="col-sm-3">วันที่อัพโหลด </strong><span class="col-sm-9">{{$asset->created_at}}</span>
-                            </div>
+                            </div> --}}
                   
                         
                         </div>

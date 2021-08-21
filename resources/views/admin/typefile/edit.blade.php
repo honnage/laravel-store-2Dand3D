@@ -60,12 +60,12 @@
                         
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
                                         <strong class="col-sm-12">ประเภทนามสกุลไฟล์ :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label"  name="name" id="name"  value="{{ $typefile_edit->name }}">
+                                        <input type="text" class="col-sm-12 col-form-label form-control"  name="name" id="name"  value="{{ $typefile_edit->name }}">
                                     </div>
         
                                     <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
                                         <strong class="col-sm-12">คำอธิบาย :<strong style="color:red;"> * </strong></strong><br>
-                                        <input type="text" class="col-sm-12 col-form-label" name="description" id="description" value="{{ $typefile_edit->description }}">
+                                        <input type="text" class="col-sm-12 col-form-label form-control" name="description" id="description" value="{{ $typefile_edit->description }}">
                                     </div>
 
                                     <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">

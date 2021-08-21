@@ -100,7 +100,7 @@
                                         @endif
                                         
                                         <td class="col-sm-2">
-                                            <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/license/edit/'.$row->id)}}"><i class="far fa-edit"></i></a></center>
+                                            <center><a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/asset/detail/'.$row->id)}}"><i class="fas fa-eye"></i></a></center>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -33,6 +33,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('asset/search/{id}',[AssetController::class, 'user_search_datatable']);
 
     Route::get('download/asset/{id}',[DownloadController::class,'download']);
+
+    Route::get('users/edit/{id}',[UsersController::class,'edit']);
+    Route::post('users/update/{id}',[UsersController::class, 'update']);
 });
 
 //admin path only
@@ -59,8 +62,11 @@ Route::middleware(['auth','StatusIS'])->group(function(){
     Route::get('license/search/',[LicenseController::class, 'search_datatable']);
 
     Route::get('asset/dashboard/',[AssetController::class,'dashboard_admin']);  
-    Route::get('asset/search/',[AssetController::class,'admin_search_datatable']);     
+    Route::get('asset/search/',[AssetController::class,'admin_search_datatable']); 
+
     Route::get('users',[UsersController::class,'index']);                           // UsersController
+    Route::get('users/edit-status/{id}',[UsersController::class,'edit_status']);
+ 
 });
 
 // TestController

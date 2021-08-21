@@ -58,15 +58,15 @@
                                 <form action="{{url('/license/store/')}}" method="post" enctype="multipart/form-data">
 
                                     {{csrf_field()}}
-                                    <div class="row form-inline">
+                                    <div class="form-group">
                                         <div class="form-group col-xs-12 col-sm-12 col-md-12 my-3">
                                             <strong class="col-sm-12">ประเภทเผยเเพร่ สำหรับภาษาไทย :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label"  name="name_th" id="name_th" placeholder="เช่น ศิลปะ ">
+                                            <input type="text" class="col-sm-12 col-form-label form-control"  name="name_th" id="name_th" placeholder="เช่น ศิลปะ ">
                                         </div>
             
                                         <div class="form-group col-xs-12 col-sm-12 col-md-16 my-3">
                                             <strong class="col-sm-12">ประเภทเผยเเพร่ สำหรับภาษาอังกฤษ :<strong style="color:red;"> * </strong></strong><br>
-                                            <input type="text" class="col-sm-12 col-form-label" name="name_en" id="name_en" placeholder="เช่น Art ">
+                                            <input type="text" class="col-sm-12 col-form-label form-control" name="name_en" id="name_en" placeholder="เช่น Art ">
                                         
                                         </div>
                                     </div>

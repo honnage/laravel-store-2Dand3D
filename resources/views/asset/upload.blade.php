@@ -58,7 +58,7 @@
                             {{csrf_field()}}
                             <div class="form-group my-2">
                                 <strong class="col-sm-12">ชื่อชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
-                                <input type="text" class="col-sm-12 col-form-label"  name="display_name" id="display_name" value="{{isset($asset)?"$asset->display_name":' '}}" >
+                                <input type="text" class="col-sm-12 col-form-label form-control"  name="display_name" id="display_name" value="{{isset($asset)?"$asset->display_name":' '}}" >
                             </div>
 
                             <div class="form-group my-4">
@@ -69,7 +69,7 @@
 
                             <div class="form-group my-4">
                                 <strong class="col-sm-12">ราคา :<strong style="color:red;"> * </strong></strong><br>
-                                <input type="text" class="col-sm-12 col-form-label"  name="price" id="price" value="{{isset($asset)?"$asset->price":' '}}" >
+                                <input type="text" class="col-sm-12 col-form-label form-control"  name="price" id="price" value="{{isset($asset)?"$asset->price":' '}}" >
                             </div>
 
                             <div class="form-group my-4">

@@ -104,7 +104,6 @@ class AssetController extends Controller{
         $asset_size = $asset->getSize();
   
         $asset = new AssetModel;
-        // $asset->asset_id = "U".Auth::user()->id."A".$asset_gen;
         $asset->user_id = Auth::user()->id;
         $asset->display_name = $request->display_name;
         $asset->description = $request->description;
@@ -186,8 +185,7 @@ class AssetController extends Controller{
         return redirect('/');
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
         $asset = AssetModel::find($id);
         AssetModel::find($id)->delete();
         File::delete(public_path($asset->image));

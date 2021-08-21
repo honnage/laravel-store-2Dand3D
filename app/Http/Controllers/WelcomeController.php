@@ -9,6 +9,7 @@ use App\Models\AssetModel;
 use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
+use App\Models\User;
 
 class WelcomeController extends Controller{
     public function index(Request $request){
