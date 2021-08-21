@@ -69,12 +69,12 @@
                                         <th><center>แสดงชิ้นงาน</center></th>
                                         <th><center>ดาวน์โหลด</center></th>
                                         <th><center>รายงาน</center></th>
-
+                                        <th><center>รายละเอียด</center></th>
                                         @if(Auth::user()->id == $data)
+                                     
                                             <th><center>แก้ไข</center></th>
                                             <th><center>ลบ</center></th>
                                         @endif
-
                                     </tr>
                                 </thead>
                                 @foreach($asset as $row)
@@ -105,10 +105,13 @@
                                         <td class="col-sm-1"><center>{{number_format( $row->download->count() )}}<center></td>
                                         <td class="col-sm-1"><center>{{number_format( $row->report->count() )}}<center></td>
 
+                                        <td class="col-sm-1">  <center><a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/report/datails/'.$row->id)}}"><i class="fas fa-eye"></i></a></center></td>
 
                                         @if(Auth::user()->id == $row->user_id)
                                             <td>
-                                                <center><a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/asset/edit/'.$row->id)}}"><i class="far fa-edit"></i></a></center>
+                                                <center>
+                                                    <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/asset/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
+                                                </center>
                                             </td>
                                             <td>
                                                 <center>
@@ -124,7 +127,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
-                            <div class="pagination-block">
+                            <div class="pagination-block" style="float:right">
                                 {{  $asset->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else

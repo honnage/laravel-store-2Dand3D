@@ -49,8 +49,60 @@ class ReportController extends Controller
         $licenses = LicenseModel::all();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         $asset = AssetModel::find($id);
+        $report = ReportModel::where('asset_id', $id)->paginate(10);
         return view('report.details', 
+            compact('categories','typefiles','formats','licenses','asset','report'));
+    }
+
+    public function edit($id){
+        $categories = CategoryModel::all();
+        $typefiles = TypefileModel::all();
+        $licenses = LicenseModel::all();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+        $asset = AssetModel::find($id);
+        return view('admin.report.edit', 
             compact('categories','typefiles','formats','licenses','asset'));
+    }
+
+    
+    public function edit_show_asset(Request $request, $id){
+        //ตรวจสอบข้อมูล
+        $request->status_show;
+        $asset = AssetModel::find($id);
+
+        if($request->status_show == 99){ 
+            $report = new ReportModel;
+            $report->user_id = Auth::user()->id;
+            $report->asset_id = $id;
+            $report->description = "แอดมินได้ดำเนินการตรวจสอบ ชิ้นงานของคุณได้รับการรายที่ไม่เหมาะ จึงปิดการแสดงชิ้นงาน";
+            $report->save(); 
+        }
+
+        if($request->status_show == 1){
+            $report = new ReportModel;
+            $report->user_id = Auth::user()->id;
+            $report->asset_id = $id;
+            $report->description = "แอดมินได้การแก้ไขการแสดงชิ้นงานของคุณเป็นรูปแบบ โมเดล";
+            $report->save();
+        }
+        
+        if($request->status_show == 0){
+            $report = new ReportModel;
+            $report->user_id = Auth::user()->id;
+            $report->asset_id = $id;
+            $report->description = "แอดมินได้การแก้ไขการแสดงชิ้นงานของคุณเป็นรูปแบบ รูปภาพ";
+            $report->save();
+        }
+
+        DB::table('asset')
+        ->where('id', '=', $asset->id)
+        ->update([
+            'status_show' => $request->status_show,
+            'updated_at' => now(),
+        ]);
+
+        session()->flash("success", "แก้ไขเรียบร้อบ!");
+        return redirect('/asset/dashboard');
     }
 
 }

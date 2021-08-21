@@ -47,6 +47,10 @@ class User extends Authenticatable
         return $this->hasMany(AssetModel::class, 'user_id');   
     }
 
+    public function report(){
+        return $this->hasMany(ReportModel::class, 'user_id');      
+    }
+
     public function checkIsStatus(){
         return $this->isStatus;
     }

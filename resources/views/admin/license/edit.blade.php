@@ -123,7 +123,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
-                            <div class="pagination-block">
+                            <div class="pagination-block" style="float:right">
                                 {{  $license->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else

@@ -96,7 +96,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
-                            <div class="pagination-block">
+                            <div class="pagination-block" style="float:right">
                                 {{  $users->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else

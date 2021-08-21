@@ -73,6 +73,8 @@ Route::middleware(['auth','StatusIS'])->group(function(){
     Route::post('users/update/status/{id}',[UsersController::class, 'update_status']);
     Route::get('users/search/',[UsersController::class,'search_datatable']); 
 
+    Route::get('report/edit/{id}',[ReportController::class,'edit']);  
+    Route::post('report/edit/show-asset/{id}',[ReportController::class, 'edit_show_asset']);
     
  
 });

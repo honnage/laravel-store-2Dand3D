@@ -33,7 +33,6 @@
                 </div>
                 
                 <div class="card mb-4">
-                   
                     <div class="card-header" style="background: rgb(65, 62, 57); color: white; font-size: 18px">
                  
                         <label class="my-2">
@@ -71,6 +70,7 @@
                                         <th><center>ดาวน์โหลด</center></th>
                                         <th><center>รายงาน</center></th>
                                         <th><center>รายละเอียด</center></th>
+                                        <th><center>แก้ไข</center></th>
                                     </tr>
                                 </thead>
                                 @foreach($asset as $row)
@@ -101,14 +101,21 @@
                                         <td class="col-sm-1"><center>{{number_format( $row->report->count() )}}<center></td>
 
                                         <td class="col-sm-2">
-                                            <center><a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/report/datails/'.$row->id)}}"><i class="fas fa-eye"></i></a></center>
+                                            <center>
+                                                <a class="btn btn-primary col-sm-12" style="width: 50px" href="{{url('/report/datails/'.$row->id)}}"><i class="fas fa-eye"></i></a>
+                                            </center>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <center>
+                                                <a class="btn btn-warning col-sm-12" style="width: 50px" href="{{url('/report/edit/'.$row->id)}}"><i class="far fa-edit"></i></a>
+                                            </center>
                                         </td>
                                     </tr>
                                 </tbody>
                                 @endforeach
                             </table>
-                            <div class="pagination-block">
-                                {{  $asset->appends(request()->input())->links('layouts.paginationlinks') }}
+                            <div class="pagination-block" style="float:right">
+                                {{ $asset->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else
                             <h3 class="text text-center" style="color:red">-- ไม่มีข้อมูลชิ้นงานในระบบ --</h3>

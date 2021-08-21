@@ -139,7 +139,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
-                            <div class="pagination-block">
+                            <div class="pagination-block" style="float:right">
                                 {{  $category->appends(request()->input())->links('layouts.paginationlinks') }}
                             </div>
                         @else

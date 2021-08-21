@@ -17,4 +17,8 @@ class ReportModel extends Model
     public function asset(){
         return $this->belongsTo(AssetModelser::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
