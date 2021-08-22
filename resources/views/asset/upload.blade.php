@@ -44,8 +44,9 @@
                             </div>
                             
                         </div>
-                        <img src="{{url($asset->image)}}"  width="100%" height="100%">
+                      
                         @if (isset($asset) != null)
+                            <img src="{{url($asset->image)}}"  width="100%" height="100%">
                             @if ($asset->status_show == 1 )
                                 <div style="background: #17C2A6;" height="800px" class="my-4">
                                     <model-viewer src="{{asset($asset->model_path)}}"  auto-rotate camera-controls ar width="auto"></model-viewer>
