@@ -66,9 +66,9 @@
                                 <thead >
                                     <tr>
                                         <th>ลำดับ</th>
-                                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
-                                            <th>ผู้รายงาน</th>
-                                        @endif
+                                        {{-- @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1) --}}
+                                        <th>ผู้รายงาน</th>
+                                        {{-- @endif --}}
                                         <th>คำอธิบาย</th>
                                         <th><center>วันที่รายงาน</center></th>
                                     </tr>
@@ -77,9 +77,9 @@
                                 <tbody>
                                     <tr>
                                         <td><b>{{ $report->firstItem()+$loop->index}}</b></td>
-                                        @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1)
-                                            <td class="col-sm-1">{{ $row->user->firstname}} {{ $row->user->lastname}}</td>
-                                        @endif
+                                        {{-- @if(Auth::user()->isStatus == 10 || Auth::user()->id == 1) --}}
+                                        <td class="col-sm-1">{{ $row->user->firstname}} {{ $row->user->lastname}}</td>
+                                        {{-- @endif --}}
                                         <td class="col-sm-9">{!!$row->description!!}    </td>
                                         <td class="col-sm-3"><center>{{ $row->created_at}}</center></td>
                                       

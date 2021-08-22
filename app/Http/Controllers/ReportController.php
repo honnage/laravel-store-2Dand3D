@@ -10,6 +10,7 @@ use App\Models\CategoryModel;
 use App\Models\TypefileModel;
 use App\Models\LicenseModel;
 use App\Models\ReportModel;
+use App\Models\User;
 
 class ReportController extends Controller
 {
@@ -39,8 +40,19 @@ class ReportController extends Controller
         $report->asset_id = $id;
         $report->description = $request->description;
         $report->save();
+
+        $data = $id;
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $detail = User::find($id);
+
+        $asset = AssetModel::find($id);
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         session()->flash("success", "รายงานเรียนร้อย!");
-        return redirect('/');
+        // return redirect('/');
+        return view('asset.detail', 
+            compact('asset','categories','typefiles','formats','licenses','detail','data'));
     }
 
     public function datails($id){
@@ -49,7 +61,7 @@ class ReportController extends Controller
         $licenses = LicenseModel::all();
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         $asset = AssetModel::find($id);
-        $report = ReportModel::where('asset_id', $id)->paginate(10);
+        $report = ReportModel::where('asset_id', $id)->orderBy('updated_at', 'desc')->paginate(10);
         return view('report.details', 
             compact('categories','typefiles','formats','licenses','asset','report'));
     }
@@ -113,7 +125,7 @@ class ReportController extends Controller
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         $asset = AssetModel::find($id);
 
-        $query = ReportModel::where('asset_id',$id);
+        $query = ReportModel::where('asset_id',$id)->orderBy('updated_at', 'desc');
         $search = $request->get('search');
         $columns = ['description'];
         foreach ($columns as $column) {

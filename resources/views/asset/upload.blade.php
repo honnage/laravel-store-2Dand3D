@@ -153,7 +153,7 @@
                                 </div>
 
                                 <div class="form-group my-4">
-                                    <strong class="col-sm-12">ไฟล์ชิ้นงาน :<strong style="color:red;"> * </strong></strong><br>
+                                    <strong class="col-sm-12">ไฟล์ชิ้นงาน :<strong style="color:red;"> * jpg jpeg png zip rar gltf glb  </strong></strong><br>
                                     <input type="file" name="asset" value="" class="form-control">
                                 </div>
 

@@ -30,7 +30,7 @@ class AssetController extends Controller{
         $licenses = LicenseModel::get();
         $detail = User::find($id);
 
-        $asset = AssetModel::where('user_id',$id)->paginate(10);  
+        $asset = AssetModel::where('user_id',$id)->orderBy('updated_at', 'desc')->paginate(10);  
         $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         return view('asset.dashboard', 
             compact('asset','categories','typefiles','formats','licenses','detail','data'));
@@ -70,7 +70,7 @@ class AssetController extends Controller{
                 'typefile_id' => 'required',
                 'license_id' => 'required',
                 'image' => 'required|mimes:jpg,jpeg,png',
-                'asset' => 'required|mimes:jpg,jpeg,png,zip,rar'
+                // 'asset' => 'required|mimes:jpg,jpeg,png,zip,rar,gltf,glb'
             ],
             [
                 'display_name.required' => "กรุณาป้อนชื่อชิ้นงาน",
@@ -84,7 +84,7 @@ class AssetController extends Controller{
                 'image.required' => "กรุณาอัพโหลดรูปภาพ",
                 'image.mimes' => "นามสกุลรูปภาพต้องเป็น jpg jpeg png",
                 'asset.required' => "กรุณาอัพโหลดชิ้นงาน",
-                'asset.mimes' => "นามสกุลต้องเป็น jpg jpeg png zip rar",
+                // 'asset.mimes' => "นามสกุลต้องเป็น jpg jpeg png zip rar gltf glb",
             ]
         );
 
@@ -98,10 +98,12 @@ class AssetController extends Controller{
         // upload asset
         $asset = $request->file('asset'); 
         $asset_ext = strtolower($asset->getClientOriginalExtension()); // ดึงนามสกุลไฟล์ภาพ
-        $asset_gen = hexdec(uniqid()); //Generate ชื่อภาพ
-        $asset_location = "upload/assets/";
-        $asset_path  = $asset_location."u".Auth::user()->id."_".$asset_gen;
-        $asset_size = $asset->getSize();
+        if( $asset_ext == "gltf" || $asset_ext == "glb" || $asset_ext == "zip" ||  $asset_ext == "rar" || $asset_ext == "png" || $asset_ext == "jpg" || $asset_ext == "jpeg" ){
+            $asset_gen = hexdec(uniqid()); //Generate ชื่อภาพ
+            $asset_location = "upload/assets/";
+            $asset_path  = $asset_location."u".Auth::user()->id."_".$asset_gen;
+            $asset_size = $asset->getSize();
+        }
   
         $asset = new AssetModel;
         $asset->user_id = Auth::user()->id;
@@ -181,8 +183,16 @@ class AssetController extends Controller{
         }
 
         AssetModel::find($id)->update($data);
+    
+        $user = Auth::user();
+        $asset = AssetModel::find($id);
+        $categories = CategoryModel::all();
+        $typefiles = TypefileModel::all();
+        $licenses = LicenseModel::all();
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
         Session()->flash('success', 'อัพเดทข้อมูลเรียบร้อยแล้ว');
-        return redirect('/');
+        // return redirect('/');
+        return view('asset.upload', compact('user','categories','typefiles','formats','licenses','asset'));
     }
 
     public function destroy($id){

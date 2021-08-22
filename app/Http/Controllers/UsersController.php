@@ -76,8 +76,17 @@ class UsersController extends Controller
             'lastname' =>  $request->lastname,
             'updated_at' => now(),
         ]);
+        $license = LicenseModel::orderBy('updated_at', 'desc')->paginate(10);
+        $categories = CategoryModel::get();
+        $typefiles = TypefileModel::get();
+        $licenses = LicenseModel::get();
+        $users = User::find($id);
+        $formats = TypefileModel::select('formats')->groupBy('formats')->orderBy('formats', 'desc')->get();
+
         Session()->flash('success', 'อัพเดทข้อมูลเรียบร้อยแล้ว');
-        return redirect('/');
+        // return redirect('/');
+        return view('users.edit', 
+            compact('license', 'users','categories','typefiles','formats','licenses'));
     }
 
     public function edit_status($id){
